@@ -2,24 +2,15 @@ import { describeRoute } from 'hono-openapi'
 import { resolver, validator } from 'hono-openapi/zod'
 import { GetSpeaker } from '../../use-cases/GetSpeaker.ts'
 import { SpeakerResponseDTO } from './dtos/SpeakerResponseDTO.ts'
-import { CONCHA_ASENSIO } from '../../../shared/infrastructure/fixtures/speakers.ts'
 import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
 import type { SpeakerProfilePrimitives } from '../../domain/models/SpeakerProfile.ts'
 import { SpeakerProfileDTO } from './dtos/SpeakerProfileDTO.ts'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
 import { z } from '../../../shared/infrastructure/controllers/zod.ts'
+import { SpeakerIdInPath } from '../../../shared/infrastructure/controllers/schemas/SpeakerId.ts'
 
 const ParamsSchema = z.object({
-  id: z
-    .string()
-    .uuid()
-    .openapi({
-      param: {
-        name: 'id',
-        in: 'path',
-      },
-      example: CONCHA_ASENSIO.id,
-    }),
+  id: SpeakerIdInPath,
 })
 
 export const GetSpeakerEndpoint = {
@@ -45,6 +36,7 @@ export const GetSpeakerEndpoint = {
     async (c) => {
       const getSpeaker = await c.var.container.getAsync(GetSpeaker)
       const param = c.req.valid('param')
+
       const speaker = await getSpeaker.execute(SpeakerId.fromPrimitives(param.id))
 
       const speakerPrimitives = speaker.toPrimitives()

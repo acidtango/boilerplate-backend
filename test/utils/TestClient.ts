@@ -59,7 +59,7 @@ export class TestClient {
     await mongoClient.close()
   }
 
-  async registerSpeaker() {
+  async registerSpeaker({ expectedStatus = 201 } = {}) {
     const res = await this.app.request('/api/v1/speakers/registration', {
       method: 'POST',
       headers: {
@@ -71,10 +71,11 @@ export class TestClient {
         password: CONCHA_ASENSIO.password,
       }),
     })
-    expect(res.status).toBe(201)
+    expect(res.status).toBe(expectedStatus)
     return {
       status: res.status,
       res,
+      body: res.status === 201 ? null : await res.json(),
     }
   }
 

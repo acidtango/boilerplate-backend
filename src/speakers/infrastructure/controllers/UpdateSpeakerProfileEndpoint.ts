@@ -3,23 +3,14 @@ import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
 import { SpeakerProfileDTO } from './dtos/SpeakerProfileDTO.ts'
 import { SpeakerName } from '../../domain/models/SpeakerName.ts'
 import { SpeakerAge } from '../../domain/models/SpeakerAge.ts'
-import { CONCHA_ASENSIO } from '../../../shared/infrastructure/fixtures/speakers.ts'
 import { UpdateSpeakerProfile } from '../../use-cases/UpdateSpeakerProfile.ts'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
 import { describeRoute } from 'hono-openapi'
 import { validator } from 'hono-openapi/zod'
+import { SpeakerIdInPath } from '../../../shared/infrastructure/controllers/schemas/SpeakerId.ts'
 
 const ParamsSchema = z.object({
-  id: z
-    .string()
-    .uuid()
-    .openapi({
-      param: {
-        name: 'id',
-        in: 'path',
-      },
-      example: CONCHA_ASENSIO.id,
-    }),
+  id: SpeakerIdInPath,
 })
 
 export const UpdateSpeakerProfileEndpoint = {

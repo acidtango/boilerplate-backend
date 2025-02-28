@@ -6,5 +6,6 @@ export class DomainError extends Error {
   constructor(message: string, code: DomainErrorCode) {
     super(message)
     this.code = code
+    this.name = this.constructor.name
   }
 }

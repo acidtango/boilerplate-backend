@@ -4,19 +4,10 @@ import { type Endpoint, factory } from '../../../shared/infrastructure/controlle
 import { z } from '../../../shared/infrastructure/controllers/zod.ts'
 import { ApproveTalk } from '../../use-cases/ApproveTalk.ts'
 import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
-import { JUNIOR_XP } from '../../../shared/infrastructure/fixtures/talks.ts'
+import { TalkIdInPath } from '../../../shared/infrastructure/controllers/schemas/TalkId.ts'
 
 const ParamsSchema = z.object({
-  id: z
-    .string()
-    .uuid()
-    .openapi({
-      param: {
-        name: 'id',
-        in: 'path',
-      },
-      example: JUNIOR_XP.id,
-    }),
+  id: TalkIdInPath,
 })
 
 export const ApproveTalkEndpoint = {

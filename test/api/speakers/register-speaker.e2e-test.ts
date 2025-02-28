@@ -14,6 +14,19 @@ describe('register speaker', () => {
     expect(status).toBe(200)
   })
 
+  it('fails when already registered', async () => {
+    const client = await createClient()
+
+    await client.registerSpeaker()
+    const { body } = await client.registerSpeaker({ expectedStatus: 409 })
+
+    expect(body).toEqual({
+      code: 'SPEAKER_EMAIL_ALREADY_USED',
+      message: `Speaker with email ${CONCHA_ASENSIO.email} already exists`,
+      type: 'SpeakerEmailAlreadyUsedError',
+    })
+  })
+
   it('login returns a refresh token', async () => {
     const client = await createClient()
     const clock = client.getClock()

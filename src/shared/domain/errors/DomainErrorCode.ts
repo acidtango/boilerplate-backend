@@ -13,6 +13,7 @@ export const DomainErrorCode = {
   SPEAKER_EMAIL_ALREADY_USED: 'SPEAKER_EMAIL_ALREADY_USED',
   INVALID_LOGIN_CREDENTIALS: 'INVALID_LOGIN_CREDENTIALS',
   PROFILE_NOT_FILLED: 'PROFILE_NOT_FILLED',
+  INTERNAL_ERROR: 'INTERNAL_ERROR',
 }
 
 export type DomainErrorCode = (typeof DomainErrorCode)[keyof typeof DomainErrorCode]

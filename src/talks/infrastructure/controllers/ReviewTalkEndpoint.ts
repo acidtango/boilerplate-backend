@@ -4,21 +4,12 @@ import { OrganizerId } from '../../../shared/domain/models/ids/OrganizerId.ts'
 import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
 import { ReviewTalk } from '../../use-cases/ReviewTalk.ts'
 import { ReviewTalkRequestDTO } from './dtos/ReviewTalkRequestDTO.ts'
-import { JUNIOR_XP } from '../../../shared/infrastructure/fixtures/talks.ts'
 import { z } from '../../../shared/infrastructure/controllers/zod.ts'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
+import { TalkIdInPath } from '../../../shared/infrastructure/controllers/schemas/TalkId.ts'
 
 const ParamsSchema = z.object({
-  id: z
-    .string()
-    .uuid()
-    .openapi({
-      param: {
-        name: 'id',
-        in: 'path',
-      },
-      example: JUNIOR_XP.id,
-    }),
+  id: TalkIdInPath,
 })
 
 export const ReviewTalkEndpoint = {
