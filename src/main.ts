@@ -11,9 +11,18 @@ app.get(
   openAPISpecs(app, {
     documentation: {
       info: {
-        title: 'Hono API',
+        title: 'Codetalk API',
         version: '1.0.0',
-        description: 'Greeting API',
+        description: 'A service for managing tech talks events',
+      },
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+          },
+        },
       },
       servers: [{ url: 'http://localhost:8080', description: 'Local Server' }],
     },

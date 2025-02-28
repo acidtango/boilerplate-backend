@@ -16,6 +16,7 @@ export const ProposeTalkEndpoint = {
     describeRoute({
       description: 'Proposes a talk',
       tags: ['Talks'], // TODO: use enum
+      security: [{ bearerAuth: [] }],
       responses: {
         201: {
           description: 'Talk proposed',

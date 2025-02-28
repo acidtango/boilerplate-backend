@@ -27,6 +27,7 @@ export const GetTalkEndpoint = {
     describeRoute({
       description: 'Get a talk by id',
       tags: ['Talks'],
+      security: [{ bearerAuth: [] }],
       responses: {
         200: {
           description: 'Ok',

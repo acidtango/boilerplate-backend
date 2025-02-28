@@ -12,6 +12,7 @@ export const ListEventsEndpoint = {
     describeRoute({
       description: 'List events',
       tags: ['Events'],
+      security: [{ bearerAuth: [] }],
       responses: {
         200: {
           description: 'Lists the events',

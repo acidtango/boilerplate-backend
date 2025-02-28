@@ -17,6 +17,7 @@ export const CreateEventEndpoint = {
       description:
         'This endpoint allows the user to create a new event in the Codetalk platform. An event represents a conference, meetup, or similar gathering where sessions can be scheduled, and speakers can participate. The user provides the event details, including its name, date, location, and other relevant information. Upon successful creation, the API returns the details of the newly created event.',
       tags: ['Events'],
+      security: [{ bearerAuth: [] }],
       responses: {
         201: {
           description: 'The event was successfully created',

@@ -29,6 +29,7 @@ export const UpdateSpeakerProfileEndpoint = {
     describeRoute({
       description: 'Updates an speaker profile',
       tags: ['Speakers'],
+      security: [{ bearerAuth: [] }],
       responses: {
         200: {
           description: 'Speaker profile updated',

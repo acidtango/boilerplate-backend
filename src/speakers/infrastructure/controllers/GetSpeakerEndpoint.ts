@@ -29,6 +29,7 @@ export const GetSpeakerEndpoint = {
     describeRoute({
       description: 'Gets a speaker profile',
       tags: ['Speakers'],
+      security: [{ bearerAuth: [] }],
       responses: {
         200: {
           description: 'Ok',

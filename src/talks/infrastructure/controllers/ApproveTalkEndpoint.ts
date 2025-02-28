@@ -26,6 +26,7 @@ export const ApproveTalkEndpoint = {
     describeRoute({
       description: 'Approves a talk',
       tags: ['Talks'],
+      security: [{ bearerAuth: [] }],
       responses: {
         200: {
           description: 'Talk approved',

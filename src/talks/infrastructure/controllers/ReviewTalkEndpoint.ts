@@ -28,6 +28,7 @@ export const ReviewTalkEndpoint = {
     describeRoute({
       description: 'Assigns a talk for review',
       tags: ['Talks'],
+      security: [{ bearerAuth: [] }],
       responses: {
         200: {
           description: 'Talk assigned for review',
