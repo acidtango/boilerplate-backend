@@ -6,7 +6,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: acid
       MONGO_INITDB_ROOT_PASSWORD: password
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - db-data:/data/db
 
@@ -16,7 +16,7 @@ services:
       SERVICES: sqs
       AWS_DEFAULT_REGION: eu-west-1
     ports:
-      - 4566:4566
+      - "4566:4566"
     volumes:
       - ./init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh
 
@@ -27,7 +27,7 @@ services:
       AWS_ENDPOINT: http://aws:4566
       AWS_SQS_URL: http://sqs.eu-west-1.aws:4566/000000000000/localstack-queue
     ports:
-      - 8080:8080
+      - "8080:8080"
 
   devcontainer:
     image: mcr.microsoft.com/devcontainers/typescript-node
