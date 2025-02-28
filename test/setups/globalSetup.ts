@@ -1,5 +1,4 @@
 import { afterAll, afterEach, beforeAll, beforeEach } from 'vitest'
-import { container } from './container.ts'
 import { Token } from '../../src/shared/domain/services/Token.ts'
 import type { Reseteable } from '../../src/shared/infrastructure/repositories/Reseteable.ts'
 import type { Closable } from '../../src/shared/infrastructure/repositories/Closable.ts'
@@ -16,6 +15,8 @@ beforeAll(async (context) => {
     return
   }
   console.log('beforeAll')
+  const { container } = await import('./container.ts')
+
   repos = await Promise.all([
     container.getAsync<Closable & Reseteable>(Token.EVENT_REPOSITORY),
     container.getAsync<Closable & Reseteable>(Token.SPEAKER_REPOSITORY),
@@ -36,6 +37,7 @@ afterEach(async (context) => {
     return
   }
   console.log('afterEach', context.task.file.name)
+  const { container } = await import('./container.ts')
   const eventBus = await container.getAsync<EventBusMemory>(Token.EVENT_BUS)
   await eventBus.waitForEvents()
 })
