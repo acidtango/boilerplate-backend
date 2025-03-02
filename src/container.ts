@@ -31,6 +31,8 @@ import { SpeakerRepositoryMongo } from './speakers/infrastructure/repositories/S
 import { EventRepositoryMongo } from './events/infrastructure/repositories/EventRepositoryMongo.ts'
 import { TalkRepositoryMongo } from './talks/infrastructure/repositories/TalkRepositoryMongo.ts'
 import { EmailSenderNoop } from './shared/infrastructure/email/EmailSenderNoop.ts'
+import { RequestContext } from './shared/infrastructure/controllers/middlewares/RequestContext.ts'
+import { LoggerPino } from './shared/infrastructure/services/logger/LoggerPino.ts'
 
 export const container = new Container({ defaultScope: BindingScopeEnum.Singleton })
 
@@ -74,9 +76,11 @@ container.bind(Token.CLOCK).toConstantValue(new ClockFake())
 container.bind(Token.EVENT_BUS).toDynamicValue(EventBusMemory.create)
 container.bind(Token.EMAIL_SENDER).toConstantValue(new EmailSenderNoop())
 container.bind(Token.DOMAIN_EVENT_MAPPER).toDynamicValue(DomainEventMapperFake.create)
+container.bind(Token.LOGGER).toDynamicValue(LoggerPino.create)
 
 // Libraries
 container.load(mongoModule)
 
 // Hono
 container.bind(Token.APP).toDynamicValue(createHono)
+container.bind(RequestContext).toConstantValue(new RequestContext())

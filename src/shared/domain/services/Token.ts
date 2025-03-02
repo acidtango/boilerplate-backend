@@ -8,6 +8,7 @@ export const Token = {
   EVENT_BUS: 'EVENT_BUS',
   CLOCK: 'CLOCK',
   CRYPTO: 'CRYPTO',
+  LOGGER: 'LOGGER',
   EMAIL_SENDER: 'EMAIL_SENDER',
   DB_CONFIG: 'DB_CONFIG',
 } as const

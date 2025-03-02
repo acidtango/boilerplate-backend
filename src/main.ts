@@ -5,7 +5,6 @@ import { app } from './app.ts'
 import { config } from './shared/infrastructure/config.ts'
 
 app.get('/ui', swaggerUI({ url: '/docs' }))
-
 app.get(
   '/docs',
   openAPISpecs(app, {

@@ -26,6 +26,7 @@ export const ListEventsEndpoint = {
     }),
     async (c) => {
       const listEvents = await c.var.container.getAsync(ListEvents)
+
       const events = await listEvents.execute()
 
       const mapped = events.map((event) => {

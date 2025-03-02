@@ -26,7 +26,6 @@ export class EventRepositoryMongo implements EventRepository, Reseteable, Closab
 
   async findAll(): Promise<TalkEvent[]> {
     const talkEventsPrimitives = await this.talkEvents.find().toArray()
-
     return talkEventsPrimitives.map(TalkEvent.fromPrimitives)
   }
 

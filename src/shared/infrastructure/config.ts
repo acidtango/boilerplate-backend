@@ -26,4 +26,8 @@ export const config = {
   apiPrefix: process.env.API_PREFIX || 'api/',
   testModeEnabled: process.env.NODE_ENV === 'test',
   runThirdPartyTests: process.env.RUN_THIRD_PARTY_TESTS === 'true',
+  logger: {
+    pretty: process.env.NODE_ENV !== 'production',
+    level: 'debug',
+  },
 }
