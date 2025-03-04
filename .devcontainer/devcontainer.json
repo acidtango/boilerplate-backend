@@ -7,7 +7,6 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "dbaeumer.vscode-eslint",
         "ms-azuretools.vscode-docker",
         "mutantdino.resourcemonitor",
         "eamodio.gitlens",
