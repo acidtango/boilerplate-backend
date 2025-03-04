@@ -6,7 +6,6 @@ import {
   conchaSpeaker,
 } from '../../../../test/mother/SpeakerMother/Concha.ts'
 import { testMongoOptions } from '../../../../test/setups/testMongoOptions.ts'
-import { container as prodContainer } from '../../../container.ts'
 import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
 import { Token } from '../../../shared/domain/services/Token.ts'
 import { CONCHA_ASENSIO } from '../../../shared/infrastructure/fixtures/speakers.ts'
@@ -22,12 +21,12 @@ describe('SpeakerRepository', () => {
   container.bind(SpeakerRepositoryMemory).toDynamicValue(SpeakerRepositoryMemory.create)
   container.bind(SpeakerRepositoryMongo).toDynamicValue(SpeakerRepositoryMongo.create)
   container.load(mongoModule)
-  prodContainer.rebind(Token.DB_CONFIG).toConstantValue(testMongoOptions)
+  container.rebind(Token.DB_CONFIG).toConstantValue(testMongoOptions)
 
   describe.each([
-    [SpeakerRepositoryMemory.name, SpeakerRepositoryMemory],
-    [SpeakerRepositoryMongo.name, SpeakerRepositoryMongo],
-  ])('%s', (name, repositoryClass) => {
+    { repositoryClass: SpeakerRepositoryMemory },
+    { repositoryClass: SpeakerRepositoryMongo },
+  ])('$repositoryClass.name', ({ repositoryClass }) => {
     let speakerRepository: SpeakerRepository & Reseteable & Closable
 
     beforeAll(async () => {

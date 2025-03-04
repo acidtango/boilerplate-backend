@@ -3,7 +3,6 @@ import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import { codemotionEvent } from '../../../../test/mother/EventMother/Codemotion.ts'
 import { jsdayEvent, jsdayId } from '../../../../test/mother/EventMother/JsDay.ts'
 import { testMongoOptions } from '../../../../test/setups/testMongoOptions.ts'
-import { container as prodContainer } from '../../../container.ts'
 import { Token } from '../../../shared/domain/services/Token.ts'
 import type { Closable } from '../../../shared/infrastructure/repositories/Closable.ts'
 import { mongoModule } from '../../../shared/infrastructure/repositories/CreateMongoClient.ts'
@@ -17,12 +16,11 @@ describe('TalkEventRepository', () => {
   container.bind(EventRepositoryMemory).toDynamicValue(EventRepositoryMemory.create)
   container.bind(EventRepositoryMongo).toDynamicValue(EventRepositoryMongo.create)
   container.load(mongoModule)
-  prodContainer.rebind(Token.DB_CONFIG).toConstantValue(testMongoOptions)
-
+  container.rebind(Token.DB_CONFIG).toConstantValue(testMongoOptions)
   describe.each([
-    [EventRepositoryMemory.name, EventRepositoryMemory],
-    [EventRepositoryMongo.name, EventRepositoryMongo],
-  ])('%s', (name, repositoryClass) => {
+    { repositoryClass: EventRepositoryMemory },
+    { repositoryClass: EventRepositoryMongo },
+  ])('$repositoryClass.name', ({ repositoryClass }) => {
     let talkEventRepository: EventRepository & Reseteable & Closable
 
     beforeAll(async () => {
