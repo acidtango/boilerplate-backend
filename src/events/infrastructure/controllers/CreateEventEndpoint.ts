@@ -1,12 +1,12 @@
 import { describeRoute } from 'hono-openapi'
 import { validator } from 'hono-openapi/zod'
-import { EventDateRange } from '../../domain/models/EventDateRange.ts'
 import { EventId } from '../../../shared/domain/models/ids/EventId.ts'
+import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
+import { EventDateRange } from '../../domain/models/EventDateRange.ts'
 import { EventName } from '../../domain/models/EventName.ts'
 import { EventProposalsDateRange } from '../../domain/models/EventProposalsDateRange.ts'
-import { CreateEventRequestDTO } from './dtos/CreateEventRequestDTO.ts'
 import { CreateEvent } from '../../use-cases/CreateEvent.ts'
-import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
+import { CreateEventRequestDTO } from './dtos/CreateEventRequestDTO.ts'
 
 export const CreateEventEndpoint = {
   method: 'post' as const,
@@ -39,6 +39,6 @@ export const CreateEventEndpoint = {
         proposalsDateRange,
       })
       return c.body(null, 201)
-    }
+    },
   ),
 } satisfies Endpoint

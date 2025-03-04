@@ -1,7 +1,7 @@
 import { AggregateRoot } from '../../../shared/domain/models/hex/AggregateRoot.ts'
 import type { Primitives } from '../../../shared/domain/models/hex/Primitives.ts'
-import { EventDateRange } from './EventDateRange.ts'
 import { EventId } from '../../../shared/domain/models/ids/EventId.ts'
+import { EventDateRange } from './EventDateRange.ts'
 import { EventName } from './EventName.ts'
 import { EventProposalsDateRange } from './EventProposalsDateRange.ts'
 
@@ -20,7 +20,7 @@ export class TalkEvent extends AggregateRoot {
     eventId: EventId,
     name: EventName,
     dateRange: EventDateRange,
-    proposalsDateRange: EventProposalsDateRange
+    proposalsDateRange: EventProposalsDateRange,
   ) {
     super()
     this.proposalsDateRange = proposalsDateRange
@@ -33,7 +33,7 @@ export class TalkEvent extends AggregateRoot {
     id: EventId,
     name: EventName,
     dateRange: EventDateRange,
-    proposalsDateRange: EventProposalsDateRange
+    proposalsDateRange: EventProposalsDateRange,
   ) {
     return new TalkEvent(id, name, dateRange, proposalsDateRange)
   }
@@ -43,7 +43,7 @@ export class TalkEvent extends AggregateRoot {
       EventId.fromPrimitives(primitives.id),
       EventName.fromPrimitives(primitives.name),
       EventDateRange.fromPrimitives(primitives.dateRange),
-      EventProposalsDateRange.fromPrimitives(primitives.proposalsDateRange)
+      EventProposalsDateRange.fromPrimitives(primitives.proposalsDateRange),
     )
   }
 

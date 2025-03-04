@@ -1,5 +1,5 @@
 import { expect } from 'vitest'
-import { DomainEvent } from '../../src/shared/domain/events/DomainEvent.ts'
+import type { DomainEvent } from '../../src/shared/domain/events/DomainEvent.ts'
 import type { EventBus } from '../../src/shared/domain/models/hex/EventBus.ts'
 
 export class EventBusFake implements EventBus {

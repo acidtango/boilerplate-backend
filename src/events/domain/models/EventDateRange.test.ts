@@ -1,13 +1,16 @@
-import { JSDAY_CANARIAS } from '../../../shared/infrastructure/fixtures/events.ts'
-import { EventDateRange } from './EventDateRange.ts'
-import { InvalidDateRangeError } from '../errors/InvalidDateRangeError.ts'
 import { describe, expect, it } from 'vitest'
+import { JSDAY_CANARIAS } from '../../../shared/infrastructure/fixtures/events.ts'
+import { InvalidDateRangeError } from '../errors/InvalidDateRangeError.ts'
+import { EventDateRange } from './EventDateRange.ts'
 
 describe('EventDateRange', () => {
   it('is serializable', () => {
     const { startDate, endDate } = JSDAY_CANARIAS
 
-    const eventDateRange = EventDateRange.fromPrimitives({ startDate, endDate })
+    const eventDateRange = EventDateRange.fromPrimitives({
+      startDate,
+      endDate,
+    })
 
     expect(eventDateRange).toBeInstanceOf(EventDateRange)
     expect(eventDateRange.toPrimitives()).toEqual({ startDate, endDate })

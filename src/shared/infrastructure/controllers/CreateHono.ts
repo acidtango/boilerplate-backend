@@ -1,13 +1,13 @@
-import type { interfaces } from 'inversify'
 import { Hono } from 'hono'
 import { jwt } from 'hono/jwt'
-import { containerMiddleware } from './middlewares/ContainerMiddleware.ts'
+import type { interfaces } from 'inversify'
 import { Token } from '../../domain/services/Token.ts'
+import { config } from '../config.ts'
 import type { Endpoint } from './factory.ts'
-import { requestContextMiddleware } from './middlewares/RequestContext.ts'
+import { containerMiddleware } from './middlewares/ContainerMiddleware.ts'
 import { handle } from './middlewares/ErrorHandler.ts'
 import { loggerMiddleware } from './middlewares/LoggerMiddleware.ts'
-import { config } from '../config.ts'
+import { requestContextMiddleware } from './middlewares/RequestContext.ts'
 
 declare module 'hono' {
   interface ContextVariableMap {

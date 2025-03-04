@@ -1,6 +1,6 @@
-import { Speaker } from '../models/Speaker.ts'
-import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
-import { EmailAddress } from '../../../shared/domain/models/EmailAddress.ts'
+import type { EmailAddress } from '../../../shared/domain/models/EmailAddress.ts'
+import type { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
+import type { Speaker } from '../models/Speaker.ts'
 
 export interface SpeakerRepository {
   save(speaker: Speaker): Promise<void>

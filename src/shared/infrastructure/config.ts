@@ -2,7 +2,7 @@
 export const config = {
   db: {
     host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT || '27017', 10),
+    port: Number.parseInt(process.env.DB_PORT || '27017', 10),
     username: process.env.DB_USERNAME || 'acid',
     password: process.env.DB_PASSWORD || 'password',
     database: process.env.DB_DATABASE || 'develop',
@@ -29,5 +29,5 @@ export const config = {
     secret: process.env.JWT_SECRET || 'ilovecats',
   },
   forceEnableORMRepositories: process.env.ENABLE_TEST_ORM_REPOSITORIES === 'true',
-  listeningPort: parseInt(process.env.APP_PORT || '8080', 10),
+  listeningPort: Number.parseInt(process.env.APP_PORT || '8080', 10),
 }

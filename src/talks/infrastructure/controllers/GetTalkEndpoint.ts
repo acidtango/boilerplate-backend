@@ -1,11 +1,11 @@
 import { describeRoute } from 'hono-openapi'
-import { TalkResponseDTO } from './dtos/TalkResponseDTO.ts'
-import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
 import { resolver, validator } from 'hono-openapi/zod'
+import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
+import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
+import { TalkIdInPath } from '../../../shared/infrastructure/controllers/schemas/TalkId.ts'
 import { z } from '../../../shared/infrastructure/controllers/zod.ts'
 import { GetTalk } from '../../use-cases/GetTalk.ts'
-import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
-import { TalkIdInPath } from '../../../shared/infrastructure/controllers/schemas/TalkId.ts'
+import { TalkResponseDTO } from './dtos/TalkResponseDTO.ts'
 
 const ParamsSchema = z.object({
   id: TalkIdInPath,
@@ -40,6 +40,6 @@ export const GetTalkEndpoint = {
       const talkPrimitives = talk.toPrimitives()
 
       return c.json(talkPrimitives)
-    }
+    },
   ),
 } satisfies Endpoint

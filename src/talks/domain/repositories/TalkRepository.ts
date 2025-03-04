@@ -1,5 +1,5 @@
-import { Talk } from '../models/Talk.ts'
-import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
+import type { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
+import type { Talk } from '../models/Talk.ts'
 
 export interface TalkRepository {
   save(talk: Talk): Promise<void>

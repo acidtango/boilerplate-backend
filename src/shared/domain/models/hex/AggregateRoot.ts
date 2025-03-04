@@ -1,4 +1,4 @@
-import { DomainEvent } from '../../events/DomainEvent.ts'
+import type { DomainEvent } from '../../events/DomainEvent.ts'
 
 export abstract class AggregateRoot {
   private recordedEvents: DomainEvent[] = []

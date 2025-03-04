@@ -1,15 +1,15 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { TalkRepositoryFake } from '../../../test/fakes/TalkRepositoryFake.ts'
-import { juniorXpId, juniorXpTalkReviewed } from '../../../test/mother/TalkMother/JuniorXp.ts'
-import { TalkStatus } from '../domain/models/TalkStatus.ts'
-import { TalkCannotBeApprovedError } from '../domain/errors/TalkCannotBeApprovedError.ts'
-import { ApproveTalk } from './ApproveTalk.ts'
-import { TalkNotFoundError } from '../domain/errors/TalkNotFoundError.ts'
 import {
   improvingTestsId,
   improvingTestsTalk,
 } from '../../../test/mother/TalkMother/ImprovingTests.ts'
+import { juniorXpId, juniorXpTalkReviewed } from '../../../test/mother/TalkMother/JuniorXp.ts'
 import { nonExistingTalkId } from '../../../test/mother/TalkMother/NotExistent.ts'
+import { TalkCannotBeApprovedError } from '../domain/errors/TalkCannotBeApprovedError.ts'
+import { TalkNotFoundError } from '../domain/errors/TalkNotFoundError.ts'
+import { TalkStatus } from '../domain/models/TalkStatus.ts'
+import { ApproveTalk } from './ApproveTalk.ts'
 
 describe('ApproveTalk', () => {
   let talkRepository: TalkRepositoryFake

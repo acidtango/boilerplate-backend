@@ -1,10 +1,10 @@
-import { type interfaces } from 'inversify'
-import { Collection, Db } from 'mongodb'
-import { EventId } from '../../../shared/domain/models/ids/EventId.ts'
-import type { EventRepository } from '../../domain/repositories/EventRepository.ts'
-import { TalkEvent, type TalkEventPrimitives } from '../../domain/models/TalkEvent.ts'
-import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
+import type { interfaces } from 'inversify'
+import { type Collection, Db } from 'mongodb'
+import type { EventId } from '../../../shared/domain/models/ids/EventId.ts'
 import type { Closable } from '../../../shared/infrastructure/repositories/Closable.ts'
+import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
+import { TalkEvent, type TalkEventPrimitives } from '../../domain/models/TalkEvent.ts'
+import type { EventRepository } from '../../domain/repositories/EventRepository.ts'
 
 export class EventRepositoryMongo implements EventRepository, Reseteable, Closable {
   private readonly talkEvents: Collection<TalkEventPrimitives>

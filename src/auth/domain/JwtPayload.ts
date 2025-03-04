@@ -1,4 +1,4 @@
-import { Role } from '../../shared/domain/models/Role.ts'
+import type { Role } from '../../shared/domain/models/Role.ts'
 
 export type JwtPayload = {
   /**

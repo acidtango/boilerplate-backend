@@ -1,13 +1,13 @@
 import type { interfaces } from 'inversify'
+import type { Language } from '../../shared/domain/models/Language.ts'
+import type { EventBus } from '../../shared/domain/models/hex/EventBus.ts'
 import { UseCase } from '../../shared/domain/models/hex/UseCase.ts'
-import { Language } from '../../shared/domain/models/Language.ts'
-import { SpeakerAge } from '../domain/models/SpeakerAge.ts'
-import { SpeakerName } from '../domain/models/SpeakerName.ts'
-import { SpeakerId } from '../../shared/domain/models/ids/SpeakerId.ts'
+import type { SpeakerId } from '../../shared/domain/models/ids/SpeakerId.ts'
+import { Token } from '../../shared/domain/services/Token.ts'
+import type { SpeakerAge } from '../domain/models/SpeakerAge.ts'
+import type { SpeakerName } from '../domain/models/SpeakerName.ts'
 import type { SpeakerRepository } from '../domain/repositories/SpeakerRepository.ts'
 import { SpeakerFinder } from '../domain/services/SpeakerFinder.ts'
-import { Token } from '../../shared/domain/services/Token.ts'
-import type { EventBus } from '../../shared/domain/models/hex/EventBus.ts'
 
 export type UpdateSpeakerProfileParams = {
   id: SpeakerId
@@ -22,7 +22,7 @@ export class UpdateSpeakerProfile extends UseCase {
       ...(await Promise.all([
         container.getAsync<SpeakerRepository>(Token.SPEAKER_REPOSITORY),
         container.getAsync<EventBus>(Token.EVENT_BUS),
-      ]))
+      ])),
     )
   }
 

@@ -1,6 +1,6 @@
-import { ValueObject } from './hex/ValueObject.ts'
+import * as crypto from 'node:crypto'
 import { HashedPassword } from './HashedPassword.ts'
-import * as crypto from 'crypto'
+import { ValueObject } from './hex/ValueObject.ts'
 
 export class PlainPassword extends ValueObject {
   private readonly password: string

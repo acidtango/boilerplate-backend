@@ -1,8 +1,8 @@
 import { z } from '../../../../shared/infrastructure/controllers/zod.ts'
 import { DateRangeDTO } from './DateRangeDTO.ts'
-import { ProposalDateRangeDTO as ProposalDateRangeDTO } from './ProposalDateRangeDTO.ts'
 import { EventIdDTO } from './EventIdDTO.ts'
 import { EventNameDTO } from './EventNameDTO.ts'
+import { ProposalDateRangeDTO } from './ProposalDateRangeDTO.ts'
 
 export const CreateEventRequestDTO = z
   .object({

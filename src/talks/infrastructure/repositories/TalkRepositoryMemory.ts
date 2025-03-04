@@ -1,8 +1,8 @@
-import type { TalkRepository } from '../../domain/repositories/TalkRepository.ts'
-import { Talk, type TalkPrimitives } from '../../domain/models/Talk.ts'
-import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
-import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
+import type { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
 import type { Closable } from '../../../shared/infrastructure/repositories/Closable.ts'
+import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
+import { Talk, type TalkPrimitives } from '../../domain/models/Talk.ts'
+import type { TalkRepository } from '../../domain/repositories/TalkRepository.ts'
 
 export class TalkRepositoryMemory implements TalkRepository, Reseteable, Closable {
   public static create() {

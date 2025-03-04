@@ -1,7 +1,7 @@
-import { SpeakerName } from './SpeakerName.ts'
-import { SpeakerAge } from './SpeakerAge.ts'
-import { Language } from '../../../shared/domain/models/Language.ts'
+import type { Language } from '../../../shared/domain/models/Language.ts'
 import type { Primitives } from '../../../shared/domain/models/hex/Primitives.ts'
+import { SpeakerAge } from './SpeakerAge.ts'
+import { SpeakerName } from './SpeakerName.ts'
 
 export type SpeakerProfilePrimitives = Primitives<SpeakerProfile>
 
@@ -10,7 +10,7 @@ export class SpeakerProfile {
     return new SpeakerProfile(
       SpeakerName.fromPrimitives(primitives.name),
       SpeakerAge.fromPrimitives(primitives.age),
-      primitives.language
+      primitives.language,
     )
   }
 

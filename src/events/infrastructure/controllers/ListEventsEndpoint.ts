@@ -1,9 +1,9 @@
+import { describeRoute } from 'hono-openapi'
 import { resolver } from 'hono-openapi/zod'
+import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
 import { z } from '../../../shared/infrastructure/controllers/zod.ts'
 import { ListEvents } from '../../use-cases/ListEvents.ts'
 import { EventResponseDTO } from './dtos/EventResponseDTO.ts'
-import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
-import { describeRoute } from 'hono-openapi'
 
 export const ListEventsEndpoint = {
   method: 'get' as const,
@@ -47,6 +47,6 @@ export const ListEventsEndpoint = {
       })
 
       return c.json(mapped, 200)
-    }
+    },
   ),
 } satisfies Endpoint

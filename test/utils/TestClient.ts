@@ -1,20 +1,20 @@
-import { expect } from 'vitest'
-import { MongoClient } from 'mongodb'
+import type { Hono } from 'hono'
 import type { Container } from 'inversify'
+import { MongoClient } from 'mongodb'
+import { expect } from 'vitest'
 import type { Clock } from '../../src/shared/domain/services/Clock.ts'
-import { CONCHA_ASENSIO } from '../../src/shared/infrastructure/fixtures/speakers.ts'
 import { Token } from '../../src/shared/domain/services/Token.ts'
-import {
-  isReseteable,
-  type Reseteable,
-} from '../../src/shared/infrastructure/repositories/Reseteable.ts'
+import type { EventBusMemory } from '../../src/shared/infrastructure/events/EventBus/EventBusMemory.ts'
 import { JSDAY_CANARIAS } from '../../src/shared/infrastructure/fixtures/events.ts'
-import { JUNIOR_XP } from '../../src/shared/infrastructure/fixtures/talks.ts'
 import { DAILOS } from '../../src/shared/infrastructure/fixtures/organizers.ts'
+import { CONCHA_ASENSIO } from '../../src/shared/infrastructure/fixtures/speakers.ts'
+import { JUNIOR_XP } from '../../src/shared/infrastructure/fixtures/talks.ts'
+import {
+  type Reseteable,
+  isReseteable,
+} from '../../src/shared/infrastructure/repositories/Reseteable.ts'
 import type { EmailSenderFake } from '../fakes/EmailSenderFake.ts'
 import { container } from '../setups/container.ts'
-import type { Hono } from 'hono'
-import { EventBusMemory } from '../../src/shared/infrastructure/events/EventBus/EventBusMemory.ts'
 
 export class TestClient {
   public readonly container: Container

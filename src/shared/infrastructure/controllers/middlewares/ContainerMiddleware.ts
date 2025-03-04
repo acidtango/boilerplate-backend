@@ -1,5 +1,5 @@
-import type { interfaces } from 'inversify'
 import { createMiddleware } from 'hono/factory'
+import type { interfaces } from 'inversify'
 
 export function containerMiddleware(container: interfaces.Container) {
   return createMiddleware(async (c, next) => {

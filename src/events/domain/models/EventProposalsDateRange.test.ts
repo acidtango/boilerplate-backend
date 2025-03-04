@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { JSDAY_CANARIAS } from '../../../shared/infrastructure/fixtures/events.ts'
-import { EventProposalsDateRange } from './EventProposalsDateRange.ts'
 import { InvalidDateRangeError } from '../errors/InvalidDateRangeError.ts'
+import { EventProposalsDateRange } from './EventProposalsDateRange.ts'
 
 describe('EventProposalsDateRange', () => {
   it('is serializable', () => {
@@ -23,13 +23,13 @@ describe('EventProposalsDateRange', () => {
     expect(() => {
       new EventProposalsDateRange(
         JSDAY_CANARIAS.proposalsDeadlineDate,
-        JSDAY_CANARIAS.proposalsStartDate
+        JSDAY_CANARIAS.proposalsStartDate,
       )
     }).toThrowError(
       new InvalidDateRangeError(
         JSDAY_CANARIAS.proposalsDeadlineDate,
-        JSDAY_CANARIAS.proposalsStartDate
-      )
+        JSDAY_CANARIAS.proposalsStartDate,
+      ),
     )
   })
 })

@@ -1,8 +1,8 @@
 import { DomainEvent } from '../../../shared/domain/events/DomainEvent.ts'
 import { DomainEventCode } from '../../../shared/domain/events/DomainEventCode.ts'
-import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
-import type { Primitives } from '../../../shared/domain/models/hex/Primitives.ts'
 import { DomainId } from '../../../shared/domain/models/hex/DomainId.ts'
+import type { Primitives } from '../../../shared/domain/models/hex/Primitives.ts'
+import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
 
 type TalkProposedPrimitives = Primitives<TalkProposed>
 
@@ -15,7 +15,7 @@ export class TalkProposed extends DomainEvent {
     return new TalkProposed(
       TalkId.fromPrimitives(primitives.talkId),
       new DomainId(primitives.eventId),
-      new Date(primitives.occurredAt)
+      new Date(primitives.occurredAt),
     )
   }
 

@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest'
 import type { JwtPayload } from 'jsonwebtoken'
 import * as jwt from 'jsonwebtoken'
+import { describe, expect, it } from 'vitest'
 import { CONCHA_ASENSIO } from '../../../src/shared/infrastructure/fixtures/speakers.ts'
 import { createClient } from '../../utils/TestClient.ts'
 

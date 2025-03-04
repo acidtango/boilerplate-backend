@@ -1,15 +1,15 @@
-import { SpeakerName } from './SpeakerName.ts'
-import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
-import { SpeakerAge } from './SpeakerAge.ts'
 import { EmailAddress } from '../../../shared/domain/models/EmailAddress.ts'
-import { Language } from '../../../shared/domain/models/Language.ts'
-import type { Primitives } from '../../../shared/domain/models/hex/Primitives.ts'
-import { AggregateRoot } from '../../../shared/domain/models/hex/AggregateRoot.ts'
 import { HashedPassword } from '../../../shared/domain/models/HashedPassword.ts'
+import type { Language } from '../../../shared/domain/models/Language.ts'
 import { PlainPassword } from '../../../shared/domain/models/PlainPassword.ts'
-import { SpeakerRegistered } from '../events/SpeakerRegistered.ts'
-import { SpeakerProfileUpdated } from '../events/SpeakerProfileUpdated.ts'
+import { AggregateRoot } from '../../../shared/domain/models/hex/AggregateRoot.ts'
+import type { Primitives } from '../../../shared/domain/models/hex/Primitives.ts'
+import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
 import { ProfileNotFilledError } from '../errors/ProfileNotFilledError.ts'
+import { SpeakerProfileUpdated } from '../events/SpeakerProfileUpdated.ts'
+import { SpeakerRegistered } from '../events/SpeakerRegistered.ts'
+import type { SpeakerAge } from './SpeakerAge.ts'
+import type { SpeakerName } from './SpeakerName.ts'
 import { SpeakerProfile } from './SpeakerProfile.ts'
 
 export type SpeakerPrimitives = Primitives<Speaker>
@@ -22,7 +22,7 @@ export class Speaker extends AggregateRoot {
       HashedPassword.fromPrimitives(primitives.password),
       primitives.salt,
       primitives.isEmailValidated,
-      primitives.profile ? SpeakerProfile.fromPrimitives(primitives.profile) : undefined
+      primitives.profile ? SpeakerProfile.fromPrimitives(primitives.profile) : undefined,
     )
   }
 
@@ -30,7 +30,7 @@ export class Speaker extends AggregateRoot {
     id: SpeakerId,
     email: EmailAddress,
     password: PlainPassword,
-    salt: string
+    salt: string,
   ): Speaker {
     const hash = password.toHashed(salt)
 
@@ -59,7 +59,7 @@ export class Speaker extends AggregateRoot {
     password: HashedPassword,
     salt: string,
     isEmailValidated: boolean,
-    profile?: SpeakerProfile
+    profile?: SpeakerProfile,
   ) {
     super()
     this.id = id

@@ -1,9 +1,9 @@
+import type { interfaces } from 'inversify'
 import { UseCase } from '../../shared/domain/models/hex/UseCase.ts'
-import { TalkId } from '../../shared/domain/models/ids/TalkId.ts'
+import type { TalkId } from '../../shared/domain/models/ids/TalkId.ts'
+import { Token } from '../../shared/domain/services/Token.ts'
 import type { TalkRepository } from '../domain/repositories/TalkRepository.ts'
 import { TalkFinder } from '../domain/services/TalkFinder.ts'
-import type { interfaces } from 'inversify'
-import { Token } from '../../shared/domain/services/Token.ts'
 
 export class ApproveTalk extends UseCase {
   private readonly talkFinder: TalkFinder

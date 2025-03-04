@@ -1,16 +1,16 @@
 import { BindingScopeEnum, Container } from 'inversify'
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
-import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
+import { codemotionEvent } from '../../../../test/mother/EventMother/Codemotion.ts'
+import { jsdayEvent, jsdayId } from '../../../../test/mother/EventMother/JsDay.ts'
+import { testMongoOptions } from '../../../../test/setups/testMongoOptions.ts'
+import { container as prodContainer } from '../../../container.ts'
+import { Token } from '../../../shared/domain/services/Token.ts'
 import type { Closable } from '../../../shared/infrastructure/repositories/Closable.ts'
+import { mongoModule } from '../../../shared/infrastructure/repositories/CreateMongoClient.ts'
+import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
 import type { EventRepository } from '../../domain/repositories/EventRepository.ts'
 import { EventRepositoryMemory } from './EventRepositoryMemory.ts'
 import { EventRepositoryMongo } from './EventRepositoryMongo.ts'
-import { jsdayEvent, jsdayId } from '../../../../test/mother/EventMother/JsDay.ts'
-import { codemotionEvent } from '../../../../test/mother/EventMother/Codemotion.ts'
-import { mongoModule } from '../../../shared/infrastructure/repositories/CreateMongoClient.ts'
-import { container as prodContainer } from '../../../container.ts'
-import { Token } from '../../../shared/domain/services/Token.ts'
-import { testMongoOptions } from '../../../../test/setups/testMongoOptions.ts'
 
 describe('TalkEventRepository', () => {
   const container = new Container({ defaultScope: BindingScopeEnum.Singleton })
@@ -22,7 +22,7 @@ describe('TalkEventRepository', () => {
   describe.each([
     [EventRepositoryMemory.name, EventRepositoryMemory],
     [EventRepositoryMongo.name, EventRepositoryMongo],
-  ])(`%s`, (name, repositoryClass) => {
+  ])('%s', (name, repositoryClass) => {
     let talkEventRepository: EventRepository & Reseteable & Closable
 
     beforeAll(async () => {

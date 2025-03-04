@@ -1,6 +1,6 @@
 import { expect } from 'vitest'
-import {
-  type EmailSender,
+import type {
+  EmailSender,
   ThanksForTheProposal,
 } from '../../src/shared/domain/services/EmailSender.ts'
 import type { Reseteable } from '../../src/shared/infrastructure/repositories/Reseteable.ts'

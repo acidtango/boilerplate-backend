@@ -1,8 +1,8 @@
-import { RequestContext } from '../../controllers/middlewares/RequestContext.ts'
-import { type interfaces } from 'inversify'
+import type { interfaces } from 'inversify'
 import { type Logger as LoggerPinoLibrary, pino } from 'pino'
 import type { Logger } from '../../../domain/services/Logger.ts'
 import { config } from '../../config.ts'
+import { RequestContext } from '../../controllers/middlewares/RequestContext.ts'
 
 export class LoggerPino implements Logger {
   private logger: LoggerPinoLibrary<never, boolean>

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { juniorXpTalk } from '../../../../test/mother/TalkMother/JuniorXp.ts'
-import { MaximumCospeakersReachedError } from '../errors/MaximumCospeakersReachedError.ts'
 import { OrganizerId } from '../../../shared/domain/models/ids/OrganizerId.ts'
 import { DAILOS } from '../../../shared/infrastructure/fixtures/organizers.ts'
+import { MaximumCospeakersReachedError } from '../errors/MaximumCospeakersReachedError.ts'
 import { TalkStatus } from './TalkStatus.ts'
 
 describe('Talk', () => {

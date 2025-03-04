@@ -1,11 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { SpeakerRepositoryFake } from '../../../test/fakes/SpeakerRepositoryFake.ts'
-import { RegisterSpeaker, type RegisterSpeakerParams } from './RegisterSpeaker.ts'
-import { CryptoFixed } from '../../shared/infrastructure/services/crypto/CryptoFixed.ts'
 import { EventBusFake } from '../../../test/fakes/EventBusFake.ts'
-import { SpeakerRegistered } from '../domain/events/SpeakerRegistered.ts'
-import { SpeakerEmailAlreadyUsedError } from '../domain/errors/SpeakerEmailAlreadyUsedError.ts'
-import { SpeakerAlreadyCreatedError } from '../domain/errors/SpeakerAlreadyCreatedError.ts'
+import { SpeakerRepositoryFake } from '../../../test/fakes/SpeakerRepositoryFake.ts'
 import {
   conchaEmail,
   conchaId,
@@ -13,6 +8,11 @@ import {
   conchaSpeaker,
 } from '../../../test/mother/SpeakerMother/Concha.ts'
 import { jorgeEmail, jorgeId, jorgePassword } from '../../../test/mother/SpeakerMother/Jorge.ts'
+import { CryptoFixed } from '../../shared/infrastructure/services/crypto/CryptoFixed.ts'
+import { SpeakerAlreadyCreatedError } from '../domain/errors/SpeakerAlreadyCreatedError.ts'
+import { SpeakerEmailAlreadyUsedError } from '../domain/errors/SpeakerEmailAlreadyUsedError.ts'
+import { SpeakerRegistered } from '../domain/events/SpeakerRegistered.ts'
+import { RegisterSpeaker, type RegisterSpeakerParams } from './RegisterSpeaker.ts'
 
 describe('RegisterSpeaker', () => {
   let speakerRepository: SpeakerRepositoryFake

@@ -1,4 +1,4 @@
-import { DomainEvent } from './DomainEvent.ts'
+import type { DomainEvent } from './DomainEvent.ts'
 
 export abstract class DomainEventSubscriber<T extends DomainEvent> {
   public static isInstance(instance: unknown): instance is DomainEventSubscriber<DomainEvent> {

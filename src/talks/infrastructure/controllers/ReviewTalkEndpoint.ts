@@ -2,11 +2,11 @@ import { describeRoute } from 'hono-openapi'
 import { validator } from 'hono-openapi/zod'
 import { OrganizerId } from '../../../shared/domain/models/ids/OrganizerId.ts'
 import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
-import { ReviewTalk } from '../../use-cases/ReviewTalk.ts'
-import { ReviewTalkRequestDTO } from './dtos/ReviewTalkRequestDTO.ts'
-import { z } from '../../../shared/infrastructure/controllers/zod.ts'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
 import { TalkIdInPath } from '../../../shared/infrastructure/controllers/schemas/TalkId.ts'
+import { z } from '../../../shared/infrastructure/controllers/zod.ts'
+import { ReviewTalk } from '../../use-cases/ReviewTalk.ts'
+import { ReviewTalkRequestDTO } from './dtos/ReviewTalkRequestDTO.ts'
 
 const ParamsSchema = z.object({
   id: TalkIdInPath,
@@ -39,6 +39,6 @@ export const ReviewTalkEndpoint = {
       })
 
       return c.body(null, 200)
-    }
+    },
   ),
 } satisfies Endpoint

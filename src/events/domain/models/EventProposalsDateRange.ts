@@ -1,5 +1,5 @@
-import { ValueObject } from '../../../shared/domain/models/hex/ValueObject.ts'
 import type { Primitives } from '../../../shared/domain/models/hex/Primitives.ts'
+import { ValueObject } from '../../../shared/domain/models/hex/ValueObject.ts'
 import { InvalidDateRangeError } from '../errors/InvalidDateRangeError.ts'
 
 type EventProposalDateRangePrimitives = Primitives<EventProposalsDateRange>

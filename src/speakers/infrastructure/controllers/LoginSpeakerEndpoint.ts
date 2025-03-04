@@ -1,11 +1,11 @@
 import { describeRoute } from 'hono-openapi'
 import { resolver, validator } from 'hono-openapi/zod'
-import { LoginSpeakerRequestDTO } from './dtos/LoginSpeakerRequestDTO.ts'
-import { LoginSpeakerResponseDTO } from './dtos/LoginSpeakerResponseDTO.ts'
 import { EmailAddress } from '../../../shared/domain/models/EmailAddress.ts'
 import { PlainPassword } from '../../../shared/domain/models/PlainPassword.ts'
-import { LoginSpeaker } from '../../use-cases/LoginSpeaker.ts'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
+import { LoginSpeaker } from '../../use-cases/LoginSpeaker.ts'
+import { LoginSpeakerRequestDTO } from './dtos/LoginSpeakerRequestDTO.ts'
+import { LoginSpeakerResponseDTO } from './dtos/LoginSpeakerResponseDTO.ts'
 
 export const LoginSpeakerEndpoint = {
   method: 'post' as const,
@@ -36,6 +36,6 @@ export const LoginSpeakerEndpoint = {
       const accessToken = await loginSpeaker.execute({ email, password })
 
       return c.json({ accessToken }, 200)
-    }
+    },
   ),
 } satisfies Endpoint

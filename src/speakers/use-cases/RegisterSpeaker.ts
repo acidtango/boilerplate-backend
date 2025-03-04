@@ -1,14 +1,14 @@
 import type { interfaces } from 'inversify'
-import { SpeakerId } from '../../shared/domain/models/ids/SpeakerId.ts'
-import { EmailAddress } from '../../shared/domain/models/EmailAddress.ts'
-import { PlainPassword } from '../../shared/domain/models/PlainPassword.ts'
-import type { SpeakerRepository } from '../domain/repositories/SpeakerRepository.ts'
-import { Token } from '../../shared/domain/services/Token.ts'
-import { Speaker } from '../domain/models/Speaker.ts'
+import type { EmailAddress } from '../../shared/domain/models/EmailAddress.ts'
+import type { PlainPassword } from '../../shared/domain/models/PlainPassword.ts'
 import type { EventBus } from '../../shared/domain/models/hex/EventBus.ts'
+import type { SpeakerId } from '../../shared/domain/models/ids/SpeakerId.ts'
 import type { Crypto } from '../../shared/domain/services/Crypto.ts'
-import { SpeakerEmailAlreadyUsedError } from '../domain/errors/SpeakerEmailAlreadyUsedError.ts'
+import { Token } from '../../shared/domain/services/Token.ts'
 import { SpeakerAlreadyCreatedError } from '../domain/errors/SpeakerAlreadyCreatedError.ts'
+import { SpeakerEmailAlreadyUsedError } from '../domain/errors/SpeakerEmailAlreadyUsedError.ts'
+import { Speaker } from '../domain/models/Speaker.ts'
+import type { SpeakerRepository } from '../domain/repositories/SpeakerRepository.ts'
 
 export type RegisterSpeakerParams = {
   id: SpeakerId
@@ -23,7 +23,7 @@ export class RegisterSpeaker {
         container.getAsync<SpeakerRepository>(Token.SPEAKER_REPOSITORY),
         container.getAsync<Crypto>(Token.CRYPTO),
         container.getAsync<EventBus>(Token.EVENT_BUS),
-      ]))
+      ])),
     )
   }
 

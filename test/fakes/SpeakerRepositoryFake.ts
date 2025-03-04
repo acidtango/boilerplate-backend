@@ -1,5 +1,5 @@
-import { SpeakerRepositoryMemory } from '../../src/speakers/infrastructure/repositories/SpeakerRepositoryMemory.ts'
 import { Speaker } from '../../src/speakers/domain/models/Speaker.ts'
+import { SpeakerRepositoryMemory } from '../../src/speakers/infrastructure/repositories/SpeakerRepositoryMemory.ts'
 import { conchaSpeaker, conchaSpeakerWithoutProfile } from '../mother/SpeakerMother/Concha.ts'
 
 export class SpeakerRepositoryFake extends SpeakerRepositoryMemory {
@@ -20,13 +20,13 @@ export class SpeakerRepositoryFake extends SpeakerRepositoryMemory {
   static createWithConcha(): SpeakerRepositoryFake {
     const speaker = conchaSpeaker()
 
-    return this.with(speaker)
+    return SpeakerRepositoryFake.with(speaker)
   }
 
   static createWithConchaWithoutProfile(): SpeakerRepositoryFake {
     const speaker = conchaSpeakerWithoutProfile()
 
-    return this.with(speaker)
+    return SpeakerRepositoryFake.with(speaker)
   }
 
   getLatestSavedSpeaker(): Speaker {

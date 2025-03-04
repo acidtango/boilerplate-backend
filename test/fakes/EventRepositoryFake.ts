@@ -1,6 +1,6 @@
 import { expect } from 'vitest'
+import type { TalkEvent } from '../../src/events/domain/models/TalkEvent.ts'
 import { EventRepositoryMemory } from '../../src/events/infrastructure/repositories/EventRepositoryMemory.ts'
-import { TalkEvent } from '../../src/events/domain/models/TalkEvent.ts'
 
 export class EventRepositoryFake extends EventRepositoryMemory {
   private saveCalled = false

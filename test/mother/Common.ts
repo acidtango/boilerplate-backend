@@ -1,4 +1,4 @@
-import { AggregateRoot } from '../../src/shared/domain/models/hex/AggregateRoot.ts'
+import type { AggregateRoot } from '../../src/shared/domain/models/hex/AggregateRoot.ts'
 
 export function exampleSalt() {
   return 'salt'

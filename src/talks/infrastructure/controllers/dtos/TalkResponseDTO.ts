@@ -1,10 +1,10 @@
+import { Language } from '../../../../shared/domain/models/Language.ts'
+import { z } from '../../../../shared/infrastructure/controllers/zod.ts'
 import { JSDAY_CANARIAS } from '../../../../shared/infrastructure/fixtures/events.ts'
 import { DAILOS } from '../../../../shared/infrastructure/fixtures/organizers.ts'
 import { CONCHA_ASENSIO } from '../../../../shared/infrastructure/fixtures/speakers.ts'
 import { JUNIOR_XP } from '../../../../shared/infrastructure/fixtures/talks.ts'
-import { Language } from '../../../../shared/domain/models/Language.ts'
 import { TalkStatus } from '../../../domain/models/TalkStatus.ts'
-import { z } from '../../../../shared/infrastructure/controllers/zod.ts'
 
 export const TalkResponseDTO = z
   .object({

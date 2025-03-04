@@ -1,9 +1,9 @@
 import { EmailAddress } from '../../../src/shared/domain/models/EmailAddress.ts'
-import { JORGE_AGUIAR } from '../../../src/shared/infrastructure/fixtures/speakers.ts'
-import { exampleSalt, flushDomainEvents } from '../Common.ts'
-import { Speaker } from '../../../src/speakers/domain/models/Speaker.ts'
-import { SpeakerId } from '../../../src/shared/domain/models/ids/SpeakerId.ts'
 import { PlainPassword } from '../../../src/shared/domain/models/PlainPassword.ts'
+import { SpeakerId } from '../../../src/shared/domain/models/ids/SpeakerId.ts'
+import { JORGE_AGUIAR } from '../../../src/shared/infrastructure/fixtures/speakers.ts'
+import { Speaker } from '../../../src/speakers/domain/models/Speaker.ts'
+import { exampleSalt, flushDomainEvents } from '../Common.ts'
 
 export function jorgeId() {
   return new SpeakerId(JORGE_AGUIAR.id)

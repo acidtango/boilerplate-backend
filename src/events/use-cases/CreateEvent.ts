@@ -1,13 +1,13 @@
 import type { interfaces } from 'inversify'
 import { UseCase } from '../../shared/domain/models/hex/UseCase.ts'
-import { EventDateRange } from '../domain/models/EventDateRange.ts'
-import { EventId } from '../../shared/domain/models/ids/EventId.ts'
-import { EventName } from '../domain/models/EventName.ts'
-import { EventProposalsDateRange } from '../domain/models/EventProposalsDateRange.ts'
+import type { EventId } from '../../shared/domain/models/ids/EventId.ts'
+import { Token } from '../../shared/domain/services/Token.ts'
+import { EventAlreadyCreatedError } from '../domain/errors/EventAlreadyCreatedError.ts'
+import type { EventDateRange } from '../domain/models/EventDateRange.ts'
+import type { EventName } from '../domain/models/EventName.ts'
+import type { EventProposalsDateRange } from '../domain/models/EventProposalsDateRange.ts'
 import { TalkEvent } from '../domain/models/TalkEvent.ts'
 import type { EventRepository } from '../domain/repositories/EventRepository.ts'
-import { EventAlreadyCreatedError } from '../domain/errors/EventAlreadyCreatedError.ts'
-import { Token } from '../../shared/domain/services/Token.ts'
 
 export type CreateEventParams = {
   id: EventId

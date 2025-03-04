@@ -1,9 +1,9 @@
-import type { SpeakerRepository } from '../../domain/repositories/SpeakerRepository.ts'
-import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
-import { Speaker, type SpeakerPrimitives } from '../../domain/models/Speaker.ts'
-import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
-import { EmailAddress } from '../../../shared/domain/models/EmailAddress.ts'
+import type { EmailAddress } from '../../../shared/domain/models/EmailAddress.ts'
+import type { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
 import type { Closable } from '../../../shared/infrastructure/repositories/Closable.ts'
+import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
+import { Speaker, type SpeakerPrimitives } from '../../domain/models/Speaker.ts'
+import type { SpeakerRepository } from '../../domain/repositories/SpeakerRepository.ts'
 
 export class SpeakerRepositoryMemory implements SpeakerRepository, Reseteable, Closable {
   public static create() {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { SpeakerAge } from './SpeakerAge.ts'
 import { UnderageSpeakerError } from '../errors/UnderageSpeakerError.ts'
+import { SpeakerAge } from './SpeakerAge.ts'
 
 describe('SpeakerAge', () => {
   it('does not fail if user is not under-age', () => {

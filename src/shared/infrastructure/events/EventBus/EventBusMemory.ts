@@ -1,9 +1,9 @@
 import type { interfaces } from 'inversify'
+import type { DomainEvent, DomainEventPrimitives } from '../../../domain/events/DomainEvent.ts'
 import type { EventBus } from '../../../domain/models/hex/EventBus.ts'
-import { DomainEvent, type DomainEventPrimitives } from '../../../domain/events/DomainEvent.ts'
-import type { DomainEventMapper } from '../DomainEventMapper/DomainEventMapper.ts'
 import { Token } from '../../../domain/services/Token.ts'
 import { sleep } from '../../utils/sleep.ts'
+import type { DomainEventMapper } from '../DomainEventMapper/DomainEventMapper.ts'
 
 export class EventBusMemory implements EventBus {
   public static async create({ container }: interfaces.Context) {
@@ -19,10 +19,10 @@ export class EventBusMemory implements EventBus {
   }
 
   async publish(domainEvents: DomainEvent[]): Promise<void> {
-    domainEvents.forEach((event) => {
-      const promise = sleep(0).then(() => this.handle(event.toPrimitives()))
+    for (const domainEvent of domainEvents) {
+      const promise = sleep(0).then(() => this.handle(domainEvent.toPrimitives()))
       this.promises.push(promise)
-    })
+    }
   }
 
   async handle(event: DomainEventPrimitives) {

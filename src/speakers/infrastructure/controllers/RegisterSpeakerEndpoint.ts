@@ -1,11 +1,11 @@
-import { RegisterSpeaker } from '../../use-cases/RegisterSpeaker.ts'
-import { RegisterSpeakerRequestDTO } from './dtos/RegisterSpeakerRequestDTO.ts'
-import { EmailAddress } from '../../../shared/domain/models/EmailAddress.ts'
-import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
-import { PlainPassword } from '../../../shared/domain/models/PlainPassword.ts'
-import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
 import { describeRoute } from 'hono-openapi'
 import { validator } from 'hono-openapi/zod'
+import { EmailAddress } from '../../../shared/domain/models/EmailAddress.ts'
+import { PlainPassword } from '../../../shared/domain/models/PlainPassword.ts'
+import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
+import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
+import { RegisterSpeaker } from '../../use-cases/RegisterSpeaker.ts'
+import { RegisterSpeakerRequestDTO } from './dtos/RegisterSpeakerRequestDTO.ts'
 
 export const RegisterSpeakerEndpoint = {
   method: 'post',
@@ -32,6 +32,6 @@ export const RegisterSpeakerEndpoint = {
         password: PlainPassword.fromPrimitives(body.password),
       })
       return c.body(null, 201)
-    }
+    },
   ),
 } satisfies Endpoint

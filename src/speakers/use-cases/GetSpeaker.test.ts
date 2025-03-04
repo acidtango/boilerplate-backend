@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { GetSpeaker } from './GetSpeaker.ts'
-import { SpeakerNotFoundError } from '../domain/errors/SpeakerNotFoundError.ts'
 import { SpeakerRepositoryFake } from '../../../test/fakes/SpeakerRepositoryFake.ts'
 import { conchaId } from '../../../test/mother/SpeakerMother/Concha.ts'
 import { nonExistingSpeakerId } from '../../../test/mother/SpeakerMother/NotImportant.ts'
+import { SpeakerNotFoundError } from '../domain/errors/SpeakerNotFoundError.ts'
+import { GetSpeaker } from './GetSpeaker.ts'
 
 describe('GetSpeaker', () => {
   let speakerRepository: SpeakerRepositoryFake

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { juniorXpId, juniorXpTalk } from '../../../test/mother/TalkMother/JuniorXp.ts'
 import { TalkRepositoryFake } from '../../../test/fakes/TalkRepositoryFake.ts'
-import { GetTalk } from './GetTalk.ts'
+import { juniorXpId, juniorXpTalk } from '../../../test/mother/TalkMother/JuniorXp.ts'
 import { TalkId } from '../../shared/domain/models/ids/TalkId.ts'
 import { TalkNotFoundError } from '../domain/errors/TalkNotFoundError.ts'
+import { GetTalk } from './GetTalk.ts'
 
 describe('GetTalk', () => {
   it('returns the talk by id', async () => {

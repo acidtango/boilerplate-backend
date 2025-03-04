@@ -1,14 +1,14 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { juniorXpId } from '../../../test/mother/TalkMother/JuniorXp.ts'
-import { TalkRepositoryFake } from '../../../test/fakes/TalkRepositoryFake.ts'
-import { ReviewTalk } from './ReviewTalk.ts'
-import { TalkNotFoundError } from '../domain/errors/TalkNotFoundError.ts'
-import { TalkAssignedForReview } from '../domain/events/TalkAssignedForReview.ts'
-import { TalkAlreadyBeingReviewed } from '../domain/errors/TalkAlreadyBeingReviewed.ts'
 import { EventBusFake } from '../../../test/fakes/EventBusFake.ts'
-import { improvingTestsId } from '../../../test/mother/TalkMother/ImprovingTests.ts'
+import { TalkRepositoryFake } from '../../../test/fakes/TalkRepositoryFake.ts'
 import { dailosId } from '../../../test/mother/OrganizerMother/Dailos.ts'
 import { notImportantOrganizerId } from '../../../test/mother/OrganizerMother/NotImportant.ts'
+import { improvingTestsId } from '../../../test/mother/TalkMother/ImprovingTests.ts'
+import { juniorXpId } from '../../../test/mother/TalkMother/JuniorXp.ts'
+import { TalkAlreadyBeingReviewed } from '../domain/errors/TalkAlreadyBeingReviewed.ts'
+import { TalkNotFoundError } from '../domain/errors/TalkNotFoundError.ts'
+import { TalkAssignedForReview } from '../domain/events/TalkAssignedForReview.ts'
+import { ReviewTalk } from './ReviewTalk.ts'
 
 describe('ReviewTalk', () => {
   let eventBus: EventBusFake
@@ -43,7 +43,10 @@ describe('ReviewTalk', () => {
   it('fails if talk does not exist', async () => {
     const talkId = improvingTestsId()
 
-    const result = reviewTalk.execute({ talkId, reviewerId: notImportantOrganizerId() })
+    const result = reviewTalk.execute({
+      talkId,
+      reviewerId: notImportantOrganizerId(),
+    })
 
     await expect(result).rejects.toThrowError(new TalkNotFoundError(talkId))
   })

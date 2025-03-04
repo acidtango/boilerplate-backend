@@ -1,7 +1,7 @@
-import type { DomainEventCode } from './DomainEventCode.ts'
-import { DomainId } from '../models/hex/DomainId.ts'
 import { UuidGeneratorRandom } from '../../infrastructure/services/uuid-generator/UuidGeneratorRandom.ts'
+import { DomainId } from '../models/hex/DomainId.ts'
 import type { Primitives } from '../models/hex/Primitives.ts'
+import type { DomainEventCode } from './DomainEventCode.ts'
 
 export type DomainEventPrimitives = Primitives<DomainEvent> & Record<string, unknown>
 
@@ -23,7 +23,7 @@ export abstract class DomainEvent {
   protected constructor(
     code: DomainEventCode,
     eventId: DomainId = new DomainId(UuidGeneratorRandom.generate()),
-    occurredAt: Date = new Date()
+    occurredAt: Date = new Date(),
   ) {
     this.occurredAt = occurredAt
     this.eventId = eventId
@@ -37,6 +37,6 @@ export abstract class DomainEvent {
 
 export type DomainEventClass = {
   code: DomainEventCode
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: We don't know the type of the argument
   fromPrimitives: (primitives: any) => DomainEvent
 }

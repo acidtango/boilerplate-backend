@@ -1,8 +1,8 @@
 import { afterAll, afterEach, beforeAll, beforeEach } from 'vitest'
 import { Token } from '../../src/shared/domain/services/Token.ts'
-import type { Reseteable } from '../../src/shared/infrastructure/repositories/Reseteable.ts'
+import type { EventBusMemory } from '../../src/shared/infrastructure/events/EventBus/EventBusMemory.ts'
 import type { Closable } from '../../src/shared/infrastructure/repositories/Closable.ts'
-import { EventBusMemory } from '../../src/shared/infrastructure/events/EventBus/EventBusMemory.ts'
+import type { Reseteable } from '../../src/shared/infrastructure/repositories/Reseteable.ts'
 
 let repos = [] as (Closable & Reseteable)[]
 

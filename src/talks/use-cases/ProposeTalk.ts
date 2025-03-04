@@ -1,19 +1,19 @@
 import type { interfaces } from 'inversify'
-import { UseCase } from '../../shared/domain/models/hex/UseCase.ts'
-import { EventId } from '../../shared/domain/models/ids/EventId.ts'
-import { SpeakerId } from '../../shared/domain/models/ids/SpeakerId.ts'
-import { TalkId } from '../../shared/domain/models/ids/TalkId.ts'
-import { Token } from '../../shared/domain/services/Token.ts'
-import { Language } from '../../shared/domain/models/Language.ts'
-import { Talk } from '../domain/models/Talk.ts'
-import { TalkDescription } from '../domain/models/TalkDescription.ts'
-import type { TalkRepository } from '../domain/repositories/TalkRepository.ts'
-import { TalkTitle } from '../domain/models/TalkTitle.ts'
 import type { EventRepository } from '../../events/domain/repositories/EventRepository.ts'
+import { EventFinder } from '../../events/domain/services/EventFinder.ts'
+import type { Language } from '../../shared/domain/models/Language.ts'
+import type { EventBus } from '../../shared/domain/models/hex/EventBus.ts'
+import { UseCase } from '../../shared/domain/models/hex/UseCase.ts'
+import type { EventId } from '../../shared/domain/models/ids/EventId.ts'
+import type { SpeakerId } from '../../shared/domain/models/ids/SpeakerId.ts'
+import type { TalkId } from '../../shared/domain/models/ids/TalkId.ts'
+import { Token } from '../../shared/domain/services/Token.ts'
 import type { SpeakerRepository } from '../../speakers/domain/repositories/SpeakerRepository.ts'
 import { SpeakerFinder } from '../../speakers/domain/services/SpeakerFinder.ts'
-import { EventFinder } from '../../events/domain/services/EventFinder.ts'
-import type { EventBus } from '../../shared/domain/models/hex/EventBus.ts'
+import { Talk } from '../domain/models/Talk.ts'
+import type { TalkDescription } from '../domain/models/TalkDescription.ts'
+import type { TalkTitle } from '../domain/models/TalkTitle.ts'
+import type { TalkRepository } from '../domain/repositories/TalkRepository.ts'
 
 export type ProposeTalkParams = {
   id: TalkId
@@ -41,7 +41,7 @@ export class ProposeTalk extends UseCase {
         container.getAsync<TalkRepository>(Token.TALK_REPOSITORY),
         container.getAsync<EventRepository>(Token.EVENT_REPOSITORY),
         container.getAsync<SpeakerRepository>(Token.SPEAKER_REPOSITORY),
-      ]))
+      ])),
     )
   }
 
@@ -49,7 +49,7 @@ export class ProposeTalk extends UseCase {
     eventBus: EventBus,
     talkRepository: TalkRepository,
     eventRepository: EventRepository,
-    speakerRepository: SpeakerRepository
+    speakerRepository: SpeakerRepository,
   ) {
     super()
     this.eventBus = eventBus

@@ -1,8 +1,8 @@
 export class Instant {
   private static addDaysToDate(date: Date, number: number) {
-    date = new Date(date)
-    date.setDate(date.getDate() + number)
-    return date
+    const clonedDate = new Date(date)
+    clonedDate.setDate(date.getDate() + number)
+    return clonedDate
   }
 
   private readonly date: Date

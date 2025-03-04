@@ -1,18 +1,18 @@
+import type { Language } from '../../../shared/domain/models/Language.ts'
 import { AggregateRoot } from '../../../shared/domain/models/hex/AggregateRoot.ts'
+import type { Primitives } from '../../../shared/domain/models/hex/Primitives.ts'
 import { EventId } from '../../../shared/domain/models/ids/EventId.ts'
 import { OrganizerId } from '../../../shared/domain/models/ids/OrganizerId.ts'
 import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
 import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
-import type { Primitives } from '../../../shared/domain/models/hex/Primitives.ts'
-import { Language } from '../../../shared/domain/models/Language.ts'
-import { TalkAssignedForReview } from '../events/TalkAssignedForReview.ts'
-import { TalkDescription } from './TalkDescription.ts'
-import { TalkStatus } from './TalkStatus.ts'
-import { TalkTitle } from './TalkTitle.ts'
 import { MaximumCospeakersReachedError } from '../errors/MaximumCospeakersReachedError.ts'
 import { TalkAlreadyBeingReviewed } from '../errors/TalkAlreadyBeingReviewed.ts'
 import { TalkCannotBeApprovedError } from '../errors/TalkCannotBeApprovedError.ts'
+import { TalkAssignedForReview } from '../events/TalkAssignedForReview.ts'
 import { TalkProposed } from '../events/TalkProposed.ts'
+import { TalkDescription } from './TalkDescription.ts'
+import { TalkStatus } from './TalkStatus.ts'
+import { TalkTitle } from './TalkTitle.ts'
 
 export type TalkPrimitives = Primitives<Talk>
 
@@ -49,7 +49,7 @@ export class Talk extends AggregateRoot {
       SpeakerId.fromPrimitives(speakerId),
       EventId.fromPrimitives(eventId),
       reviewerId ? OrganizerId.fromPrimitives(reviewerId) : undefined,
-      typeof isApproved === 'boolean' ? isApproved : undefined
+      typeof isApproved === 'boolean' ? isApproved : undefined,
     )
   }
 
@@ -60,7 +60,7 @@ export class Talk extends AggregateRoot {
     language: Language,
     cospeakers: SpeakerId[],
     speakerId: SpeakerId,
-    eventId: EventId
+    eventId: EventId,
   ) {
     const talk = new Talk(id, title, description, language, cospeakers, speakerId, eventId)
 
@@ -78,7 +78,7 @@ export class Talk extends AggregateRoot {
     speakerId: SpeakerId,
     eventId: EventId,
     reviewerId?: OrganizerId,
-    isApproved?: boolean
+    isApproved?: boolean,
   ) {
     super()
     this.id = id

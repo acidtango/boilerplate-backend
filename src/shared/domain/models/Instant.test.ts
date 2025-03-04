@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { Instant } from './Instant.ts'
 import { ClockFake } from '../../infrastructure/services/clock/ClockFake.ts'
+import { Instant } from './Instant.ts'
 
 describe('Instant', () => {
   it('saves a given date', () => {

@@ -1,10 +1,10 @@
-import { Speaker } from '../../../src/speakers/domain/models/Speaker.ts'
+import { EmailAddress } from '../../../src/shared/domain/models/EmailAddress.ts'
+import { PlainPassword } from '../../../src/shared/domain/models/PlainPassword.ts'
 import { SpeakerId } from '../../../src/shared/domain/models/ids/SpeakerId.ts'
 import { CONCHA_ASENSIO } from '../../../src/shared/infrastructure/fixtures/speakers.ts'
-import { EmailAddress } from '../../../src/shared/domain/models/EmailAddress.ts'
-import { SpeakerName } from '../../../src/speakers/domain/models/SpeakerName.ts'
+import { Speaker } from '../../../src/speakers/domain/models/Speaker.ts'
 import { SpeakerAge } from '../../../src/speakers/domain/models/SpeakerAge.ts'
-import { PlainPassword } from '../../../src/shared/domain/models/PlainPassword.ts'
+import { SpeakerName } from '../../../src/speakers/domain/models/SpeakerName.ts'
 import { exampleSalt, flushDomainEvents } from '../Common.ts'
 
 export function conchaId() {

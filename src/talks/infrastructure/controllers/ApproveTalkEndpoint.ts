@@ -1,10 +1,10 @@
 import { describeRoute } from 'hono-openapi'
 import { validator } from 'hono-openapi/zod'
+import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
+import { TalkIdInPath } from '../../../shared/infrastructure/controllers/schemas/TalkId.ts'
 import { z } from '../../../shared/infrastructure/controllers/zod.ts'
 import { ApproveTalk } from '../../use-cases/ApproveTalk.ts'
-import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
-import { TalkIdInPath } from '../../../shared/infrastructure/controllers/schemas/TalkId.ts'
 
 const ParamsSchema = z.object({
   id: TalkIdInPath,
@@ -32,6 +32,6 @@ export const ApproveTalkEndpoint = {
       await approveTalk.execute(TalkId.fromPrimitives(param.id))
 
       return c.body(null, 200)
-    }
+    },
   ),
 } satisfies Endpoint

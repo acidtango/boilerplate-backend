@@ -1,13 +1,13 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { JSDAY_CANARIAS } from '../../shared/infrastructure/fixtures/events.ts'
-import { EventDateRange } from '../domain/models/EventDateRange.ts'
+import { EventRepositoryFake } from '../../../test/fakes/EventRepositoryFake.ts'
+import { jsdayEvent, jsdayId } from '../../../test/mother/EventMother/JsDay.ts'
 import { EventId } from '../../shared/domain/models/ids/EventId.ts'
+import { JSDAY_CANARIAS } from '../../shared/infrastructure/fixtures/events.ts'
+import { EventAlreadyCreatedError } from '../domain/errors/EventAlreadyCreatedError.ts'
+import { EventDateRange } from '../domain/models/EventDateRange.ts'
 import { EventName } from '../domain/models/EventName.ts'
 import { EventProposalsDateRange } from '../domain/models/EventProposalsDateRange.ts'
 import { CreateEvent, type CreateEventParams } from './CreateEvent.ts'
-import { EventAlreadyCreatedError } from '../domain/errors/EventAlreadyCreatedError.ts'
-import { EventRepositoryFake } from '../../../test/fakes/EventRepositoryFake.ts'
-import { jsdayEvent, jsdayId } from '../../../test/mother/EventMother/JsDay.ts'
 
 describe('CreateEvent', () => {
   let eventRepository: EventRepositoryFake
@@ -43,7 +43,7 @@ function createJsdayParams(): CreateEventParams {
     dateRange: new EventDateRange(JSDAY_CANARIAS.startDate, JSDAY_CANARIAS.endDate),
     proposalsDateRange: new EventProposalsDateRange(
       JSDAY_CANARIAS.proposalsStartDate,
-      JSDAY_CANARIAS.proposalsDeadlineDate
+      JSDAY_CANARIAS.proposalsDeadlineDate,
     ),
   }
 }

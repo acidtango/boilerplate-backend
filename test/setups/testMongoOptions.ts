@@ -3,5 +3,5 @@ import type { MongoOptions } from '../../src/shared/infrastructure/repositories/
 
 export const testMongoOptions = {
   ...config.db,
-  database: 'test-' + process.env.VITEST_POOL_ID,
+  database: `test-${process.env.VITEST_POOL_ID}`,
 } satisfies MongoOptions

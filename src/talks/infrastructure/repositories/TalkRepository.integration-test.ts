@@ -1,15 +1,15 @@
+import { BindingScopeEnum, Container } from 'inversify'
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import { juniorXpId, juniorXpTalk } from '../../../../test/mother/TalkMother/JuniorXp.ts'
-import { TalkRepositoryMongo } from './TalkRepositoryMongo.ts'
-import { TalkRepositoryMemory } from './TalkRepositoryMemory.ts'
-import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
-import type { TalkRepository } from '../../domain/repositories/TalkRepository.ts'
-import { BindingScopeEnum, Container } from 'inversify'
-import { mongoModule } from '../../../shared/infrastructure/repositories/CreateMongoClient.ts'
-import type { Closable } from '../../../shared/infrastructure/repositories/Closable.ts'
+import { testMongoOptions } from '../../../../test/setups/testMongoOptions.ts'
 import { container as prodContainer } from '../../../container.ts'
 import { Token } from '../../../shared/domain/services/Token.ts'
-import { testMongoOptions } from '../../../../test/setups/testMongoOptions.ts'
+import type { Closable } from '../../../shared/infrastructure/repositories/Closable.ts'
+import { mongoModule } from '../../../shared/infrastructure/repositories/CreateMongoClient.ts'
+import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
+import type { TalkRepository } from '../../domain/repositories/TalkRepository.ts'
+import { TalkRepositoryMemory } from './TalkRepositoryMemory.ts'
+import { TalkRepositoryMongo } from './TalkRepositoryMongo.ts'
 
 describe('TalkRepository', () => {
   const container = new Container({ defaultScope: BindingScopeEnum.Singleton })
@@ -21,7 +21,7 @@ describe('TalkRepository', () => {
   describe.each([
     [TalkRepositoryMemory.name, TalkRepositoryMemory],
     [TalkRepositoryMongo.name, TalkRepositoryMongo],
-  ])(`%s`, (name, repositoryClass) => {
+  ])('%s', (name, repositoryClass) => {
     let talkRepository: TalkRepository & Reseteable & Closable
 
     beforeAll(async () => {

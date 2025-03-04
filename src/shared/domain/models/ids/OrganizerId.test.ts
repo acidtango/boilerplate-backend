@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { OrganizerId } from './OrganizerId.ts'
 import { DAILOS } from '../../../infrastructure/fixtures/organizers.ts'
 import { CONCHA_ASENSIO } from '../../../infrastructure/fixtures/speakers.ts'
+import { OrganizerId } from './OrganizerId.ts'
 
 describe('OrganizerId', () => {
   it('same ids can be compared', () => {

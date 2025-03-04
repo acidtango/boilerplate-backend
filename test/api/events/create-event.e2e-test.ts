@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { createClient } from '../../utils/TestClient.ts'
 import { JSDAY_CANARIAS } from '../../../src/shared/infrastructure/fixtures/events.ts'
+import { createClient } from '../../utils/TestClient.ts'
 
 describe('create event', () => {
   it('can be created', async () => {

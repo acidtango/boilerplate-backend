@@ -1,5 +1,5 @@
-import { TalkEvent } from '../models/TalkEvent.ts'
-import { EventId } from '../../../shared/domain/models/ids/EventId.ts'
+import type { EventId } from '../../../shared/domain/models/ids/EventId.ts'
+import type { TalkEvent } from '../models/TalkEvent.ts'
 
 export interface EventRepository {
   save(event: TalkEvent): Promise<void>

@@ -1,10 +1,10 @@
 import type { interfaces } from 'inversify'
-import { Collection, Db } from 'mongodb'
-import type { TalkRepository } from '../../domain/repositories/TalkRepository.ts'
-import { Talk, type TalkPrimitives } from '../../domain/models/Talk.ts'
-import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
-import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
+import { type Collection, Db } from 'mongodb'
+import type { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
 import type { Closable } from '../../../shared/infrastructure/repositories/Closable.ts'
+import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
+import { Talk, type TalkPrimitives } from '../../domain/models/Talk.ts'
+import type { TalkRepository } from '../../domain/repositories/TalkRepository.ts'
 
 export class TalkRepositoryMongo implements TalkRepository, Reseteable, Closable {
   public static async create({ container }: interfaces.Context) {
@@ -25,7 +25,9 @@ export class TalkRepositoryMongo implements TalkRepository, Reseteable, Closable
   }
 
   async findBy(talkId: TalkId): Promise<Talk | undefined> {
-    const talkPrimitives = await this.talks.findOne({ id: talkId.toPrimitives() })
+    const talkPrimitives = await this.talks.findOne({
+      id: talkId.toPrimitives(),
+    })
 
     if (!talkPrimitives) return undefined
 

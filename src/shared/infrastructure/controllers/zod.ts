@@ -1,4 +1,4 @@
-import { z as zod, ZodType } from 'zod'
+import { type ZodType, z as zod } from 'zod'
 import { extendZodWithOpenApi } from 'zod-openapi'
 
 extendZodWithOpenApi(zod)

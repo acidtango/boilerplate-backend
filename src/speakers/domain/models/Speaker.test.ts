@@ -1,10 +1,4 @@
 import { describe, expect, it } from 'vitest'
-import { Speaker } from './Speaker.ts'
-import {
-  notImportantEmail,
-  notImportantPassword,
-  notImportantSpeakerId,
-} from '../../../../test/mother/SpeakerMother/NotImportant.ts'
 import { exampleSalt } from '../../../../test/mother/Common.ts'
 import {
   conchaAge,
@@ -12,7 +6,13 @@ import {
   conchaName,
   conchaPassword,
 } from '../../../../test/mother/SpeakerMother/Concha.ts'
+import {
+  notImportantEmail,
+  notImportantPassword,
+  notImportantSpeakerId,
+} from '../../../../test/mother/SpeakerMother/NotImportant.ts'
 import { PlainPassword } from '../../../shared/domain/models/PlainPassword.ts'
+import { Speaker } from './Speaker.ts'
 
 describe('Speaker', () => {
   it('can check if the password is correct', () => {
@@ -21,7 +21,7 @@ describe('Speaker', () => {
       notImportantSpeakerId(),
       notImportantEmail(),
       password,
-      exampleSalt()
+      exampleSalt(),
     )
 
     const samePassword = speaker.has(password)
@@ -36,7 +36,7 @@ describe('Speaker', () => {
       notImportantSpeakerId(),
       notImportantEmail(),
       password,
-      exampleSalt()
+      exampleSalt(),
     )
 
     const samePassword = speaker.has(wrongPassword)
@@ -50,7 +50,7 @@ describe('Speaker', () => {
       notImportantSpeakerId(),
       notImportantEmail(),
       notImportantPassword(),
-      exampleSalt()
+      exampleSalt(),
     )
 
     const sameName = speaker.has(name)
@@ -64,7 +64,7 @@ describe('Speaker', () => {
       notImportantSpeakerId(),
       notImportantEmail(),
       notImportantPassword(),
-      exampleSalt()
+      exampleSalt(),
     )
 
     const sameAge = speaker.has(age)
@@ -78,7 +78,7 @@ describe('Speaker', () => {
       notImportantSpeakerId(),
       notImportantEmail(),
       notImportantPassword(),
-      exampleSalt()
+      exampleSalt(),
     )
 
     const sameLanguage = speaker.has(language)
@@ -91,7 +91,7 @@ describe('Speaker', () => {
       notImportantSpeakerId(),
       notImportantEmail(),
       notImportantPassword(),
-      exampleSalt()
+      exampleSalt(),
     )
     const name = conchaName()
     const age = conchaAge()

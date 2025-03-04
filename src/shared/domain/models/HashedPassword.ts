@@ -1,4 +1,4 @@
-import * as crypto from 'crypto'
+import * as crypto from 'node:crypto'
 import { ValueObject } from './hex/ValueObject.ts'
 
 export class HashedPassword extends ValueObject {

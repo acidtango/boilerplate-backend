@@ -1,5 +1,5 @@
 import { AggregateAlreadyCreatedError } from '../../../shared/domain/errors/AggregateAlreadyCreatedError.ts'
-import { EventId } from '../../../shared/domain/models/ids/EventId.ts'
+import type { EventId } from '../../../shared/domain/models/ids/EventId.ts'
 import { TalkEvent } from '../models/TalkEvent.ts'
 
 export class EventAlreadyCreatedError extends AggregateAlreadyCreatedError {

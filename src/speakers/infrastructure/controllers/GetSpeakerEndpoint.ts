@@ -1,13 +1,13 @@
 import { describeRoute } from 'hono-openapi'
 import { resolver, validator } from 'hono-openapi/zod'
-import { GetSpeaker } from '../../use-cases/GetSpeaker.ts'
-import { SpeakerResponseDTO } from './dtos/SpeakerResponseDTO.ts'
 import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
-import type { SpeakerProfilePrimitives } from '../../domain/models/SpeakerProfile.ts'
-import { SpeakerProfileDTO } from './dtos/SpeakerProfileDTO.ts'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
-import { z } from '../../../shared/infrastructure/controllers/zod.ts'
 import { SpeakerIdInPath } from '../../../shared/infrastructure/controllers/schemas/SpeakerId.ts'
+import { z } from '../../../shared/infrastructure/controllers/zod.ts'
+import type { SpeakerProfilePrimitives } from '../../domain/models/SpeakerProfile.ts'
+import { GetSpeaker } from '../../use-cases/GetSpeaker.ts'
+import type { SpeakerProfileDTO } from './dtos/SpeakerProfileDTO.ts'
+import { SpeakerResponseDTO } from './dtos/SpeakerResponseDTO.ts'
 
 const ParamsSchema = z.object({
   id: SpeakerIdInPath,
@@ -48,14 +48,14 @@ export const GetSpeakerEndpoint = {
           isEmailValidated: 3,
           profile: mapProfileToDTO(speakerPrimitives.profile),
         },
-        200
+        200,
       )
-    }
+    },
   ),
 } satisfies Endpoint
 
 function mapProfileToDTO(
-  profilePrimitives?: SpeakerProfilePrimitives
+  profilePrimitives?: SpeakerProfilePrimitives,
 ): SpeakerProfileDTO | undefined {
   if (!profilePrimitives) {
     return undefined

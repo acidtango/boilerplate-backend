@@ -1,9 +1,9 @@
 import type { interfaces } from 'inversify'
-import { Speaker } from '../domain/models/Speaker.ts'
-import { SpeakerId } from '../../shared/domain/models/ids/SpeakerId.ts'
-import type { SpeakerRepository } from '../domain/repositories/SpeakerRepository.ts'
-import { SpeakerNotFoundError } from '../domain/errors/SpeakerNotFoundError.ts'
+import type { SpeakerId } from '../../shared/domain/models/ids/SpeakerId.ts'
 import { Token } from '../../shared/domain/services/Token.ts'
+import { SpeakerNotFoundError } from '../domain/errors/SpeakerNotFoundError.ts'
+import type { Speaker } from '../domain/models/Speaker.ts'
+import type { SpeakerRepository } from '../domain/repositories/SpeakerRepository.ts'
 
 export class GetSpeaker {
   public static async create({ container }: interfaces.Context) {

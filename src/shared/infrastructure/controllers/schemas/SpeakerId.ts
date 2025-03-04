@@ -1,5 +1,5 @@
-import { z } from '../zod.ts'
 import { CONCHA_ASENSIO } from '../../fixtures/speakers.ts'
+import { z } from '../zod.ts'
 
 export const SpeakerIdInPath = z
   .string()

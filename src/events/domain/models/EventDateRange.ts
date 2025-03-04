@@ -1,5 +1,5 @@
-import { ValueObject } from '../../../shared/domain/models/hex/ValueObject.ts'
 import type { Primitives } from '../../../shared/domain/models/hex/Primitives.ts'
+import { ValueObject } from '../../../shared/domain/models/hex/ValueObject.ts'
 import { InvalidDateRangeError } from '../errors/InvalidDateRangeError.ts'
 
 type EventDateRangePrimitives = Primitives<EventDateRange>
@@ -23,7 +23,10 @@ export class EventDateRange extends ValueObject {
   }
 
   private static toPrimitives(eventDateRange: EventDateRange) {
-    return { startDate: eventDateRange.startDate, endDate: eventDateRange.endDate }
+    return {
+      startDate: eventDateRange.startDate,
+      endDate: eventDateRange.endDate,
+    }
   }
 
   toPrimitives() {

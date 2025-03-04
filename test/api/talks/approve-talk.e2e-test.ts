@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
+import { DAILOS } from '../../../src/shared/infrastructure/fixtures/organizers.ts'
 import { JUNIOR_XP } from '../../../src/shared/infrastructure/fixtures/talks.ts'
 import { createClient } from '../../utils/createClient.ts'
-import { DAILOS } from '../../../src/shared/infrastructure/fixtures/organizers.ts'
 
 describe('talk can be approved or rejected', () => {
   it('can approve the talk', async () => {

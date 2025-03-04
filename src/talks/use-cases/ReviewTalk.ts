@@ -1,11 +1,11 @@
 import type { interfaces } from 'inversify'
 import type { EventBus } from '../../shared/domain/models/hex/EventBus.ts'
 import { UseCase } from '../../shared/domain/models/hex/UseCase.ts'
-import { OrganizerId } from '../../shared/domain/models/ids/OrganizerId.ts'
-import { TalkId } from '../../shared/domain/models/ids/TalkId.ts'
+import type { OrganizerId } from '../../shared/domain/models/ids/OrganizerId.ts'
+import type { TalkId } from '../../shared/domain/models/ids/TalkId.ts'
 import { Token } from '../../shared/domain/services/Token.ts'
-import { TalkFinder } from '../domain/services/TalkFinder.ts'
 import type { TalkRepository } from '../domain/repositories/TalkRepository.ts'
+import { TalkFinder } from '../domain/services/TalkFinder.ts'
 
 export type ReviewTalkParams = {
   talkId: TalkId
@@ -20,7 +20,7 @@ export class ReviewTalk extends UseCase {
   public static create({ container }: interfaces.Context) {
     return new ReviewTalk(
       container.get<EventBus>(Token.EVENT_BUS),
-      container.get<TalkRepository>(Token.TALK_REPOSITORY)
+      container.get<TalkRepository>(Token.TALK_REPOSITORY),
     )
   }
 

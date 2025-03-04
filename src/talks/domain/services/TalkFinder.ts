@@ -1,7 +1,7 @@
 import { DomainService } from '../../../shared/domain/models/hex/DomainService.ts'
-import type { TalkRepository } from '../repositories/TalkRepository.ts'
-import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
+import type { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
 import { TalkNotFoundError } from '../errors/TalkNotFoundError.ts'
+import type { TalkRepository } from '../repositories/TalkRepository.ts'
 
 export class TalkFinder extends DomainService {
   private readonly talkRepository: TalkRepository

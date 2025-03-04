@@ -1,7 +1,7 @@
-import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
-import { OrganizerId } from '../../../shared/domain/models/ids/OrganizerId.ts'
 import { DomainEvent } from '../../../shared/domain/events/DomainEvent.ts'
 import { DomainEventCode } from '../../../shared/domain/events/DomainEventCode.ts'
+import type { OrganizerId } from '../../../shared/domain/models/ids/OrganizerId.ts'
+import type { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
 
 export class TalkAssignedForReview extends DomainEvent {
   private readonly talkId: TalkId

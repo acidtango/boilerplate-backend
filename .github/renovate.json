@@ -41,7 +41,12 @@
       "automerge": false
     },
     {
-      "matchPackagePatterns": ["^typeorm", "^@mikro-orm", "^mongo", "^postgres"],
+      "matchPackagePatterns": [
+        "^typeorm",
+        "^@mikro-orm",
+        "^mongo",
+        "^postgres"
+      ],
       "groupName": "orm",
       "prPriority": 1,
       "automerge": false

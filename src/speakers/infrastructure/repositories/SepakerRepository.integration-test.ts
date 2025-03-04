@@ -1,21 +1,21 @@
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import { BindingScopeEnum, Container } from 'inversify'
-import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
-import { CONCHA_ASENSIO } from '../../../shared/infrastructure/fixtures/speakers.ts'
-import { SpeakerRepositoryMongo } from './SepakerRepositoryMongo.ts'
-import { SpeakerRepositoryMemory } from './SpeakerRepositoryMemory.ts'
-import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
-import type { SpeakerRepository } from '../../domain/repositories/SpeakerRepository.ts'
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import {
   conchaEmail,
   conchaId,
   conchaSpeaker,
 } from '../../../../test/mother/SpeakerMother/Concha.ts'
-import { mongoModule } from '../../../shared/infrastructure/repositories/CreateMongoClient.ts'
-import type { Closable } from '../../../shared/infrastructure/repositories/Closable.ts'
-import { Token } from '../../../shared/domain/services/Token.ts'
-import { container as prodContainer } from '../../../container.ts'
 import { testMongoOptions } from '../../../../test/setups/testMongoOptions.ts'
+import { container as prodContainer } from '../../../container.ts'
+import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
+import { Token } from '../../../shared/domain/services/Token.ts'
+import { CONCHA_ASENSIO } from '../../../shared/infrastructure/fixtures/speakers.ts'
+import type { Closable } from '../../../shared/infrastructure/repositories/Closable.ts'
+import { mongoModule } from '../../../shared/infrastructure/repositories/CreateMongoClient.ts'
+import type { Reseteable } from '../../../shared/infrastructure/repositories/Reseteable.ts'
+import type { SpeakerRepository } from '../../domain/repositories/SpeakerRepository.ts'
+import { SpeakerRepositoryMongo } from './SepakerRepositoryMongo.ts'
+import { SpeakerRepositoryMemory } from './SpeakerRepositoryMemory.ts'
 
 describe('SpeakerRepository', () => {
   const container = new Container({ defaultScope: BindingScopeEnum.Singleton })
@@ -27,7 +27,7 @@ describe('SpeakerRepository', () => {
   describe.each([
     [SpeakerRepositoryMemory.name, SpeakerRepositoryMemory],
     [SpeakerRepositoryMongo.name, SpeakerRepositoryMongo],
-  ])(`%s`, (name, repositoryClass) => {
+  ])('%s', (name, repositoryClass) => {
     let speakerRepository: SpeakerRepository & Reseteable & Closable
 
     beforeAll(async () => {

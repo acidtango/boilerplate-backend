@@ -4,16 +4,13 @@
   "main": "src/main.ts",
   "type": "module",
   "scripts": {
-    "format:check": "prettier --check .",
-    "format:fix": "prettier --write .",
-    "format:ci": "node --run format:check",
     "start": "node src/main.ts",
     "start:dev": "node --watch src/main.ts",
-    "lint:check": "eslint --max-warnings 0 \"{src,test}/**/*.ts\"",
-    "lint:fix": "eslint --fix \"{src,test}/**/*.ts\"",
-    "lint:ci": "node --run lint:check",
+    "check": "biome check",
+    "check:fix": "biome check --fix",
+    "check:ci": "biome ci",
     "typecheck": "tsc",
-    "precommit": "node --run typecheck && node --run lint:check && node --run format:check",
+    "precommit": "node --run typecheck && node --run check",
     "test:unitary": "vitest --config ./test/config/vitest.unitary.ts",
     "test:integration": "vitest --config ./test/config/vitest.integration.ts",
     "test:e2e:db": "vitest --config ./test/config/vitest.e2e-db.ts",
@@ -35,16 +32,11 @@
     "zod-openapi": "^4.2.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.21.0",
+    "@biomejs/biome": "1.9.4",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.5",
-    "eslint": "^9.21.0",
-    "eslint-import-resolver-typescript": "^3.8.3",
-    "eslint-plugin-import": "^2.31.0",
     "pino-pretty": "^13.0.0",
-    "prettier": "^3.5.2",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.25.0",
     "vitest": "^3.0.7"
   }
 }

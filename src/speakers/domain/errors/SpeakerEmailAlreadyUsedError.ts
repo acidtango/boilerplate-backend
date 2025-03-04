@@ -1,6 +1,6 @@
 import { DomainError } from '../../../shared/domain/errors/DomainError.ts'
-import { EmailAddress } from '../../../shared/domain/models/EmailAddress.ts'
 import { DomainErrorCode } from '../../../shared/domain/errors/DomainErrorCode.ts'
+import type { EmailAddress } from '../../../shared/domain/models/EmailAddress.ts'
 
 export class SpeakerEmailAlreadyUsedError extends DomainError {
   constructor(email: EmailAddress) {

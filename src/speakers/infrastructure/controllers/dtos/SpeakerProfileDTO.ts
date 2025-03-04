@@ -1,7 +1,7 @@
-import { z } from '../../../../shared/infrastructure/controllers/zod.ts'
 import type { z as zod } from 'zod'
-import { CONCHA_ASENSIO } from '../../../../shared/infrastructure/fixtures/speakers.ts'
 import { Language } from '../../../../shared/domain/models/Language.ts'
+import { z } from '../../../../shared/infrastructure/controllers/zod.ts'
+import { CONCHA_ASENSIO } from '../../../../shared/infrastructure/fixtures/speakers.ts'
 
 export const SpeakerProfileDTO = z
   .object({

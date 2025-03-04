@@ -25,7 +25,7 @@ app.get(
       },
       servers: [{ url: 'http://localhost:8080', description: 'Local Server' }],
     },
-  })
+  }),
 )
 
 serve(
@@ -38,5 +38,5 @@ serve(
     console.log(`Server listening on ${url}`)
     console.log(`Swagger Docs available at ${url}/docs`)
     console.log(`Swagger UI available at ${url}/ui`)
-  }
+  },
 )
