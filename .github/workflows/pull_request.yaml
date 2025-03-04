@@ -22,9 +22,9 @@ jobs:
       - name: success
         run: echo "is not a draft PR"
 
-  lint:
+  check:
     needs: skip-draft
-    name: Lint
+    name: Check
     runs-on: ubuntu-latest
     container: node:lts
     timeout-minutes: 10
@@ -39,10 +39,8 @@ jobs:
         run: npm ci
       - name: Typecheck
         run: node --run typecheck
-      - name: Eslint
-        run: node --run lint:ci
-      - name: Prettier
-        run: node --run format:ci
+      - name: Run static analysis
+        run: node --run check:ci
 
   tests:
     needs: skip-draft
