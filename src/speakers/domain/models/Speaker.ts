@@ -83,7 +83,7 @@ export class Speaker extends AggregateRoot {
     return this.password.equalsTo(hash)
   }
 
-  getIdString() {
+  getIdAsString() {
     return this.id.toString()
   }
 

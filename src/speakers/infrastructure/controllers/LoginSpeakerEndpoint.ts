@@ -10,6 +10,7 @@ import { type Endpoint, factory } from '../../../shared/infrastructure/controlle
 export const LoginSpeakerEndpoint = {
   method: 'post' as const,
   path: '/api/v1/speakers/login',
+  secured: false,
   handlers: factory.createHandlers(
     describeRoute({
       description: 'Login a speaker to get the auth tokens',

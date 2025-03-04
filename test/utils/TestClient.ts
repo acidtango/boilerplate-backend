@@ -98,7 +98,7 @@ export class TestClient {
     }
   }
 
-  async updateProfile({ id = CONCHA_ASENSIO.id, jwt = '' } = {}) {
+  async updateProfile({ id = CONCHA_ASENSIO.id, jwt = CONCHA_ASENSIO.jwt } = {}) {
     const res = await this.app.request(`/api/v1/speakers/${id}/profile`, {
       method: 'PUT',
       headers: {
@@ -132,11 +132,12 @@ export class TestClient {
     }
   }
 
-  async createEvent() {
+  async createEvent({ jwt = DAILOS.jwt } = {}) {
     const res = await this.app.request('/api/v1/events', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`,
       },
       body: JSON.stringify({
         id: JSDAY_CANARIAS.id,
@@ -158,8 +159,26 @@ export class TestClient {
     }
   }
 
-  async getEvents() {
-    const res = await this.app.request('/api/v1/events')
+  async getEvents({ expectedStatus = 200, jwt = CONCHA_ASENSIO.jwt } = {}) {
+    const res = await this.app.request('/api/v1/events', {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
+    expect(res.status).toBe(expectedStatus)
+    return {
+      status: res.status,
+      body: res.status === 200 ? await res.json() : await res.text(),
+      res,
+    }
+  }
+
+  async getTalk(id = JUNIOR_XP.id, jwt = CONCHA_ASENSIO.jwt) {
+    const res = await this.app.request(`/api/v1/talks/${id}`, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
     expect(res.status).toBe(200)
     return {
       status: res.status,
@@ -168,21 +187,12 @@ export class TestClient {
     }
   }
 
-  async getTalk(id = JUNIOR_XP.id) {
-    const res = await this.app.request(`/api/v1/talks/${id}`)
-    expect(res.status).toBe(200)
-    return {
-      status: res.status,
-      body: await res.json(),
-      res,
-    }
-  }
-
-  async proposeTalk({ id = JUNIOR_XP.id } = {}) {
+  async proposeTalk({ id = JUNIOR_XP.id, jwt = CONCHA_ASENSIO.jwt } = {}) {
     const res = await this.app.request('/api/v1/talks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`,
       },
       body: JSON.stringify({
         id,
@@ -201,11 +211,12 @@ export class TestClient {
     }
   }
 
-  async assignReviewer({ id = JUNIOR_XP.id, reviewerId = DAILOS.id }) {
+  async assignReviewer({ id = JUNIOR_XP.id, reviewerId = DAILOS.id, jwt = DAILOS.jwt } = {}) {
     const res = await this.app.request(`/api/v1/talks/${id}/assignation`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`,
       },
       body: JSON.stringify({
         reviewerId,
@@ -218,11 +229,12 @@ export class TestClient {
     }
   }
 
-  async approveTalk({ id = JUNIOR_XP.id }) {
+  async approveTalk({ id = JUNIOR_XP.id, jwt = DAILOS.jwt } = {}) {
     const res = await this.app.request(`/api/v1/talks/${id}/approve`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`,
       },
       body: JSON.stringify({
         isApproved: true,

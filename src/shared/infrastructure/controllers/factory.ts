@@ -7,4 +7,5 @@ export type Endpoint = {
   path: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handlers: Array<any>
+  secured?: boolean
 }

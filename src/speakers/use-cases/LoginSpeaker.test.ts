@@ -11,6 +11,7 @@ import { Role } from '../../shared/domain/models/Role.ts'
 import { conchaEmail, conchaPassword } from '../../../test/mother/SpeakerMother/Concha.ts'
 import { notImportantPassword } from '../../../test/mother/SpeakerMother/NotImportant.ts'
 import { jorgeEmail } from '../../../test/mother/SpeakerMother/Jorge.ts'
+import { JwtSignerHono } from '../../shared/infrastructure/services/jwt/JwtSignerHono.ts'
 
 describe('LoginSpeaker', () => {
   let clock: ClockFake
@@ -20,7 +21,7 @@ describe('LoginSpeaker', () => {
   beforeEach(() => {
     clock = new ClockFake()
     speakerRepository = SpeakerRepositoryFake.createWithConcha()
-    loginSpeaker = new LoginSpeaker(speakerRepository, clock)
+    loginSpeaker = new LoginSpeaker(speakerRepository, clock, new JwtSignerHono())
   })
 
   it('returns an access token if credentials are valid', async () => {

@@ -33,6 +33,7 @@ import { TalkRepositoryMongo } from './talks/infrastructure/repositories/TalkRep
 import { EmailSenderNoop } from './shared/infrastructure/email/EmailSenderNoop.ts'
 import { RequestContext } from './shared/infrastructure/controllers/middlewares/RequestContext.ts'
 import { LoggerPino } from './shared/infrastructure/services/logger/LoggerPino.ts'
+import { JwtSignerHono } from './shared/infrastructure/services/jwt/JwtSignerHono.ts'
 
 export const container = new Container({ defaultScope: BindingScopeEnum.Singleton })
 
@@ -77,6 +78,7 @@ container.bind(Token.EVENT_BUS).toDynamicValue(EventBusMemory.create)
 container.bind(Token.EMAIL_SENDER).toConstantValue(new EmailSenderNoop())
 container.bind(Token.DOMAIN_EVENT_MAPPER).toDynamicValue(DomainEventMapperFake.create)
 container.bind(Token.LOGGER).toDynamicValue(LoggerPino.create)
+container.bind(Token.JWT_SIGNER).toConstantValue(new JwtSignerHono())
 
 // Libraries
 container.load(mongoModule)

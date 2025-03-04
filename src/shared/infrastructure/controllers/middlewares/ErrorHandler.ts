@@ -1,4 +1,5 @@
 import type { Context } from 'hono'
+import { HTTPException } from 'hono/http-exception'
 import { DomainError } from '../../../domain/errors/DomainError.ts'
 import { domainErrorToHttpStatusCode } from '../../errors/domainErrorToHttpStatusCode.ts'
 import { DomainErrorCode } from '../../../domain/errors/DomainErrorCode.ts'
@@ -18,6 +19,11 @@ export function handle(error: Error, c: Context) {
       },
       domainErrorToHttpStatusCode[error.code]
     )
+  }
+
+  if (error instanceof HTTPException) {
+    logger.debug(error)
+    return error.getResponse()
   }
 
   logger.error(error)

@@ -10,6 +10,7 @@ import { validator } from 'hono-openapi/zod'
 export const RegisterSpeakerEndpoint = {
   method: 'post',
   path: '/api/v1/speakers/registration',
+  secured: false,
   handlers: factory.createHandlers(
     describeRoute({
       description: 'Creates an event',

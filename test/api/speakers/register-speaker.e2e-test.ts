@@ -42,4 +42,14 @@ describe('register speaker', () => {
     expect(content.iat).toEqual(expectedIat)
     expect(content.exp).toEqual(expectedExp)
   })
+
+  it('returns an error with invalid jwt in authenticated endpoint', async () => {
+    const client = await createClient()
+    const { status } = await client.getEvents({
+      expectedStatus: 401,
+      jwt: 'invalid-jwt',
+    })
+
+    expect(status).toEqual(401)
+  })
 })

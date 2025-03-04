@@ -11,6 +11,7 @@ export const Token = {
   LOGGER: 'LOGGER',
   EMAIL_SENDER: 'EMAIL_SENDER',
   DB_CONFIG: 'DB_CONFIG',
+  JWT_SIGNER: 'JWT_SIGNER',
 } as const
 
 export type Token = (typeof Token)[keyof typeof Token]

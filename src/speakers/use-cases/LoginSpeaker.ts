@@ -1,4 +1,3 @@
-import jwt from 'jsonwebtoken'
 import type { interfaces } from 'inversify'
 import { EmailAddress } from '../../shared/domain/models/EmailAddress.ts'
 import { PlainPassword } from '../../shared/domain/models/PlainPassword.ts'
@@ -9,6 +8,8 @@ import { Speaker } from '../domain/models/Speaker.ts'
 import type { JwtPayload } from '../../auth/domain/JwtPayload.ts'
 import { Role } from '../../shared/domain/models/Role.ts'
 import { Token } from '../../shared/domain/services/Token.ts'
+import { config } from '../../shared/infrastructure/config.ts'
+import type { JwtSigner } from '../../shared/domain/services/JwtSigner.ts'
 
 export type LoginSpeakerParams = {
   email: EmailAddress
@@ -19,17 +20,20 @@ export class LoginSpeaker {
   static async create({ container }: interfaces.Context) {
     return new LoginSpeaker(
       await container.getAsync(Token.SPEAKER_REPOSITORY),
-      container.get(Token.CLOCK)
+      container.get(Token.CLOCK),
+      container.get(Token.JWT_SIGNER)
     )
   }
-
   private readonly speakerRepository: SpeakerRepository
 
   private readonly clock: Clock
 
-  constructor(speakerRepository: SpeakerRepository, clock: Clock) {
+  private readonly jwtSigner: JwtSigner
+
+  constructor(speakerRepository: SpeakerRepository, clock: Clock, jwtSigner: JwtSigner) {
     this.clock = clock
     this.speakerRepository = speakerRepository
+    this.jwtSigner = jwtSigner
   }
 
   async execute({ email, password }: LoginSpeakerParams): Promise<string> {
@@ -43,10 +47,10 @@ export class LoginSpeaker {
       throw new InvalidCredentialsError()
     }
 
-    return this.createAccessToken(speaker)
+    return await this.createAccessToken(speaker)
   }
 
-  private createAccessToken(speaker: Speaker) {
+  private async createAccessToken(speaker: Speaker) {
     const now = this.clock.now()
     const nowInSeconds = now.toSeconds()
     const tomorrow = now.addDays(1)
@@ -54,11 +58,11 @@ export class LoginSpeaker {
 
     const payload: JwtPayload = {
       iat: nowInSeconds,
-      sub: speaker.getIdString(),
+      sub: speaker.getIdAsString(),
       exp: tomorrowInSeconds,
       role: Role.SPEAKER,
     }
 
-    return jwt.sign(payload, 'ilovecats')
+    return await this.jwtSigner.sign(payload, config.jwt.secret)
   }
 }

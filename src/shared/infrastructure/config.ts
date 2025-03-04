@@ -21,13 +21,13 @@ export const config = {
         'http://sqs.eu-west-1.localhost.localstack.cloud:4566/000000000000/localstack-queue',
     },
   },
-  forceEnableORMRepositories: process.env.ENABLE_TEST_ORM_REPOSITORIES === 'true',
-  listeningPort: parseInt(process.env.APP_PORT || '8080', 10),
-  apiPrefix: process.env.API_PREFIX || 'api/',
-  testModeEnabled: process.env.NODE_ENV === 'test',
-  runThirdPartyTests: process.env.RUN_THIRD_PARTY_TESTS === 'true',
   logger: {
     pretty: process.env.NODE_ENV !== 'production',
     level: 'debug',
   },
+  jwt: {
+    secret: process.env.JWT_SECRET || 'ilovecats',
+  },
+  forceEnableORMRepositories: process.env.ENABLE_TEST_ORM_REPOSITORIES === 'true',
+  listeningPort: parseInt(process.env.APP_PORT || '8080', 10),
 }
