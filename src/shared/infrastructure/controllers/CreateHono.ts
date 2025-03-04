@@ -7,7 +7,7 @@ import type { Endpoint } from './factory.ts'
 import { requestContextMiddleware } from './middlewares/RequestContext.ts'
 import { handle } from './middlewares/ErrorHandler.ts'
 import { loggerMiddleware } from './middlewares/LoggerMiddleware.ts'
-import { config } from '../config.js'
+import { config } from '../config.ts'
 
 declare module 'hono' {
   interface ContextVariableMap {

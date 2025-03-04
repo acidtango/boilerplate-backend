@@ -13,6 +13,7 @@
     "lint:fix": "eslint --fix \"{src,test}/**/*.ts\"",
     "lint:ci": "node --run lint:check",
     "typecheck": "tsc",
+    "precommit": "node --run typecheck && node --run lint:check && node --run format:check",
     "test:unitary": "vitest --config ./test/config/vitest.unitary.ts",
     "test:integration": "vitest --config ./test/config/vitest.integration.ts",
     "test:e2e:db": "vitest --config ./test/config/vitest.e2e-db.ts",
