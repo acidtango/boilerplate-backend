@@ -13,7 +13,6 @@ beforeAll(async (context) => {
   if (isNotE2E(context.name)) {
     return
   }
-  console.log('beforeAll')
   const { container } = await import('./container.ts')
 
   repos = await Promise.all([
@@ -27,7 +26,6 @@ beforeEach(async (context) => {
   if (isNotE2E(context.task.file.name)) {
     return
   }
-  console.log('beforeEach', context.task.file.name)
   await Promise.all(repos.map((repo) => repo.reset()))
 })
 
@@ -35,7 +33,6 @@ afterEach(async (context) => {
   if (isNotE2E(context.task.file.name)) {
     return
   }
-  console.log('afterEach', context.task.file.name)
   const { container } = await import('./container.ts')
   const eventBus = await container.getAsync<Closable & Reseteable>(Token.EVENT_BUS)
   await eventBus.reset()
@@ -45,7 +42,6 @@ afterAll(async (context) => {
   if (isNotE2E(context.name)) {
     return
   }
-  console.log('afterAll')
   for (const repo of repos) {
     await repo.close()
   }
