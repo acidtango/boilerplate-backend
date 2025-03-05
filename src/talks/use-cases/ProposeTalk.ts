@@ -37,7 +37,7 @@ export class ProposeTalk extends UseCase {
   public static async create({ container }: interfaces.Context) {
     return new ProposeTalk(
       ...(await Promise.all([
-        container.get<EventBus>(Token.EVENT_BUS),
+        container.getAsync<EventBus>(Token.EVENT_BUS),
         container.getAsync<TalkRepository>(Token.TALK_REPOSITORY),
         container.getAsync<EventRepository>(Token.EVENT_REPOSITORY),
         container.getAsync<SpeakerRepository>(Token.SPEAKER_REPOSITORY),

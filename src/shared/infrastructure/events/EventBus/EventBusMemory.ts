@@ -2,10 +2,12 @@ import type { interfaces } from 'inversify'
 import type { DomainEvent, DomainEventPrimitives } from '../../../domain/events/DomainEvent.ts'
 import type { EventBus } from '../../../domain/models/hex/EventBus.ts'
 import { Token } from '../../../domain/services/Token.ts'
+import type { Closable } from '../../repositories/Closable.js'
+import type { Reseteable } from '../../repositories/Reseteable.js'
 import { sleep } from '../../utils/sleep.ts'
 import type { DomainEventMapper } from '../DomainEventMapper/DomainEventMapper.ts'
 
-export class EventBusMemory implements EventBus {
+export class EventBusMemory implements EventBus, Closable, Reseteable {
   public static async create({ container }: interfaces.Context) {
     return new EventBusMemory(await container.getAsync(Token.DOMAIN_EVENT_MAPPER))
   }
@@ -42,5 +44,13 @@ export class EventBusMemory implements EventBus {
 
   waitForEvents() {
     return Promise.all(this.promises)
+  }
+
+  async reset(): Promise<void> {
+    await this.waitForEvents()
+  }
+
+  async close(): Promise<void> {
+    await this.reset()
   }
 }

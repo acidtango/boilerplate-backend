@@ -5,13 +5,14 @@ import { EventRepositoryMongo } from './events/infrastructure/repositories/Event
 import { CreateEvent } from './events/use-cases/CreateEvent.ts'
 import { ListEvents } from './events/use-cases/ListEvents.ts'
 import { Token } from './shared/domain/services/Token.ts'
+import { config } from './shared/infrastructure/config.ts'
 import { createHono } from './shared/infrastructure/controllers/CreateHono.ts'
 import { RequestContext } from './shared/infrastructure/controllers/middlewares/RequestContext.ts'
 import { EmailSenderNoop } from './shared/infrastructure/email/EmailSenderNoop.ts'
 import { DomainEventMapperFake } from './shared/infrastructure/events/DomainEventMapper/DomainEventMapperFake.ts'
-import { EventBusMemory } from './shared/infrastructure/events/EventBus/EventBusMemory.ts'
+import { EventBusSQS } from './shared/infrastructure/events/EventBus/EventBusSQS.ts'
 import { mongoModule } from './shared/infrastructure/repositories/CreateMongoClient.ts'
-import { ClockFake } from './shared/infrastructure/services/clock/ClockFake.ts'
+import { ClockDate } from './shared/infrastructure/services/clock/ClockDate.ts'
 import { CryptoNode } from './shared/infrastructure/services/crypto/CryptoNode.ts'
 import { JwtSignerHono } from './shared/infrastructure/services/jwt/JwtSignerHono.ts'
 import { LoggerPino } from './shared/infrastructure/services/logger/LoggerPino.ts'
@@ -34,7 +35,6 @@ import { GetTalk } from './talks/use-cases/GetTalk.ts'
 import { ProposeTalk } from './talks/use-cases/ProposeTalk.ts'
 import { ReviewTalk } from './talks/use-cases/ReviewTalk.ts'
 import { TalkProposedSubscriber } from './talks/use-cases/subscribers/TalkProposedSubscriber.ts'
-
 export const container = new Container({
   defaultScope: BindingScopeEnum.Singleton,
 })
@@ -75,8 +75,14 @@ container.bind(Token.TALK_REPOSITORY).toDynamicValue(TalkRepositoryMongo.create)
 
 // Services
 container.bind(Token.CRYPTO).toConstantValue(new CryptoNode())
-container.bind(Token.CLOCK).toConstantValue(new ClockFake())
-container.bind(Token.EVENT_BUS).toDynamicValue(EventBusMemory.create)
+container.bind(Token.CLOCK).toConstantValue(new ClockDate())
+container
+  .bind<EventBusSQS>(Token.EVENT_BUS)
+  .toDynamicValue(EventBusSQS.create)
+  .onActivation(async (context, eventbus) => {
+    await eventbus.initialize()
+    return eventbus
+  })
 container.bind(Token.EMAIL_SENDER).toConstantValue(new EmailSenderNoop())
 container.bind(Token.DOMAIN_EVENT_MAPPER).toDynamicValue(DomainEventMapperFake.create)
 container.bind(Token.LOGGER).toDynamicValue(LoggerPino.create)
@@ -84,6 +90,7 @@ container.bind(Token.JWT_SIGNER).toConstantValue(new JwtSignerHono())
 
 // Libraries
 container.load(mongoModule)
+container.bind(Token.SQS_CONFIG).toConstantValue(config.aws)
 
 // Hono
 container.bind(Token.APP).toDynamicValue(createHono)

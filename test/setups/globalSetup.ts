@@ -1,6 +1,5 @@
 import { afterAll, afterEach, beforeAll, beforeEach } from 'vitest'
 import { Token } from '../../src/shared/domain/services/Token.ts'
-import type { EventBusMemory } from '../../src/shared/infrastructure/events/EventBus/EventBusMemory.ts'
 import type { Closable } from '../../src/shared/infrastructure/repositories/Closable.ts'
 import type { Reseteable } from '../../src/shared/infrastructure/repositories/Reseteable.ts'
 
@@ -38,8 +37,8 @@ afterEach(async (context) => {
   }
   console.log('afterEach', context.task.file.name)
   const { container } = await import('./container.ts')
-  const eventBus = await container.getAsync<EventBusMemory>(Token.EVENT_BUS)
-  await eventBus.waitForEvents()
+  const eventBus = await container.getAsync<Closable & Reseteable>(Token.EVENT_BUS)
+  await eventBus.reset()
 })
 
 afterAll(async (context) => {
@@ -50,4 +49,7 @@ afterAll(async (context) => {
   for (const repo of repos) {
     await repo.close()
   }
+  const { container } = await import('./container.ts')
+  const eventBus = await container.getAsync<Closable & Reseteable>(Token.EVENT_BUS)
+  await eventBus.close()
 })

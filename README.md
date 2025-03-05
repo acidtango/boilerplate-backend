@@ -8,5 +8,4 @@ To run it
 npm start
 ```
 
-- Meter autenticación con JWT
-- Meter SQS?
+* Quitar fake del mapper de SQS

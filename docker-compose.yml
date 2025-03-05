@@ -17,8 +17,6 @@ services:
       AWS_DEFAULT_REGION: eu-west-1
     ports:
       - '4566:4566'
-    volumes:
-      - ./init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh
 
   api:
     build: .

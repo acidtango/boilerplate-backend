@@ -1,4 +1,5 @@
-// Please keep this alphabetically ordered.
+import type { SQSConfig } from './events/EventBus/EventBusSQS.ts'
+
 export const config = {
   db: {
     host: process.env.DB_HOST || 'localhost',
@@ -8,8 +9,10 @@ export const config = {
     database: process.env.DB_DATABASE || 'develop',
   },
   aws: {
-    accessKey: process.env.AWS_ACCESS_KEY_ID || 'na',
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || 'na',
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID || 'na',
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || 'na',
+    },
     region: process.env.AWS_REGION || 'eu-west-1',
     endpoint:
       process.env.AWS_ENDPOINT === 'default'
@@ -20,7 +23,7 @@ export const config = {
         process.env.AWS_SQS_URL ||
         'http://sqs.eu-west-1.localhost.localstack.cloud:4566/000000000000/localstack-queue',
     },
-  },
+  } satisfies SQSConfig,
   logger: {
     pretty: process.env.NODE_ENV !== 'production',
     level: 'debug',

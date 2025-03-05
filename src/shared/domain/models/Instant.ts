@@ -16,7 +16,7 @@ export class Instant {
   }
 
   toSeconds(): number {
-    return this.date.getTime() / 1000
+    return Math.round(this.date.getTime() / 1000)
   }
 
   addDays(number: number): Instant {
