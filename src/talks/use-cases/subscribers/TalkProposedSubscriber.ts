@@ -1,6 +1,7 @@
 import type { interfaces } from 'inversify'
-import type { DomainEvent } from '../../../shared/domain/events/DomainEvent.ts'
+import { DomainEventCode } from '../../../shared/domain/events/DomainEventCode.ts'
 import { DomainEventSubscriber } from '../../../shared/domain/events/DomainEventSubscriber.ts'
+import type { Primitives } from '../../../shared/domain/models/hex/Primitives.js'
 import {
   type EmailSender,
   ThanksForTheProposal,
@@ -8,7 +9,7 @@ import {
 import { Token } from '../../../shared/domain/services/Token.ts'
 import type { SpeakerRepository } from '../../../speakers/domain/repositories/SpeakerRepository.ts'
 import { SpeakerFinder } from '../../../speakers/domain/services/SpeakerFinder.ts'
-import { TalkProposed } from '../../domain/events/TalkProposed.ts'
+import { TalkProposed, type TalkProposedPrimitives } from '../../domain/events/TalkProposed.ts'
 import type { TalkRepository } from '../../domain/repositories/TalkRepository.ts'
 import { TalkFinder } from '../../domain/services/TalkFinder.ts'
 
@@ -40,8 +41,17 @@ export class TalkProposedSubscriber extends DomainEventSubscriber<TalkProposed> 
     this.speakerFinder = new SpeakerFinder(speakerRepository)
   }
 
-  canHandle(domainEvent: DomainEvent): boolean {
-    return domainEvent instanceof TalkProposed
+  canHandle(primitives: unknown): primitives is TalkProposedPrimitives {
+    return Boolean(
+      typeof primitives === 'object' &&
+        primitives &&
+        'code' in primitives &&
+        primitives.code === DomainEventCode.TALK_PROPOSED,
+    )
+  }
+
+  cast(primitives: Primitives<TalkProposed>): TalkProposed {
+    return TalkProposed.fromPrimitives(primitives)
   }
 
   async on({ talkId }: TalkProposed) {

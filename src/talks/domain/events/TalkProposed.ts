@@ -4,7 +4,7 @@ import { DomainId } from '../../../shared/domain/models/hex/DomainId.ts'
 import type { Primitives } from '../../../shared/domain/models/hex/Primitives.ts'
 import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
 
-type TalkProposedPrimitives = Primitives<TalkProposed>
+export type TalkProposedPrimitives = Primitives<TalkProposed>
 
 export class TalkProposed extends DomainEvent {
   public static readonly code = DomainEventCode.TALK_PROPOSED

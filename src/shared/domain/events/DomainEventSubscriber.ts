@@ -1,11 +1,10 @@
+import type { Primitives } from '../models/hex/Primitives.js'
 import type { DomainEvent } from './DomainEvent.ts'
 
 export abstract class DomainEventSubscriber<T extends DomainEvent> {
-  public static isInstance(instance: unknown): instance is DomainEventSubscriber<DomainEvent> {
-    return instance instanceof DomainEventSubscriber
-  }
+  abstract canHandle(primitives: unknown): primitives is Primitives<T>
 
-  abstract canHandle(domainEvent: DomainEvent): boolean
+  abstract cast(primitives: Primitives<T>): T
 
   abstract on(domainEvent: T): Promise<void>
 }

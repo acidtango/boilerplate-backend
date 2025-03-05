@@ -9,7 +9,7 @@ import { config } from './shared/infrastructure/config.ts'
 import { createHono } from './shared/infrastructure/controllers/CreateHono.ts'
 import { RequestContext } from './shared/infrastructure/controllers/middlewares/RequestContext.ts'
 import { EmailSenderNoop } from './shared/infrastructure/email/EmailSenderNoop.ts'
-import { DomainEventMapperFake } from './shared/infrastructure/events/DomainEventMapper/DomainEventMapperFake.ts'
+import { DomainEventNotifierInversify } from './shared/infrastructure/events/DomainEventMapper/DomainEventNotifierInversify.js'
 import { EventBusSQS } from './shared/infrastructure/events/EventBus/EventBusSQS.ts'
 import { mongoModule } from './shared/infrastructure/repositories/CreateMongoClient.ts'
 import { ClockDate } from './shared/infrastructure/services/clock/ClockDate.ts'
@@ -35,9 +35,8 @@ import { GetTalk } from './talks/use-cases/GetTalk.ts'
 import { ProposeTalk } from './talks/use-cases/ProposeTalk.ts'
 import { ReviewTalk } from './talks/use-cases/ReviewTalk.ts'
 import { TalkProposedSubscriber } from './talks/use-cases/subscribers/TalkProposedSubscriber.ts'
-export const container = new Container({
-  defaultScope: BindingScopeEnum.Singleton,
-})
+
+export const container = new Container({ defaultScope: BindingScopeEnum.Singleton })
 
 // Use Cases
 container.bind(RegisterSpeaker).toDynamicValue(RegisterSpeaker.create)
@@ -66,7 +65,7 @@ container.bind(Token.ENDPOINT).toConstantValue(ReviewTalkEndpoint)
 container.bind(Token.ENDPOINT).toConstantValue(ApproveTalkEndpoint)
 
 // Subscribers
-container.bind(TalkProposedSubscriber).toDynamicValue(TalkProposedSubscriber.create)
+container.bind(Token.SUBSCRIBER).toDynamicValue(TalkProposedSubscriber.create)
 
 // Repositories
 container.bind(Token.SPEAKER_REPOSITORY).toDynamicValue(SpeakerRepositoryMongo.create)
@@ -79,12 +78,9 @@ container.bind(Token.CLOCK).toConstantValue(new ClockDate())
 container
   .bind<EventBusSQS>(Token.EVENT_BUS)
   .toDynamicValue(EventBusSQS.create)
-  .onActivation(async (context, eventbus) => {
-    await eventbus.initialize()
-    return eventbus
-  })
+  .onActivation(EventBusSQS.onActivation)
 container.bind(Token.EMAIL_SENDER).toConstantValue(new EmailSenderNoop())
-container.bind(Token.DOMAIN_EVENT_MAPPER).toDynamicValue(DomainEventMapperFake.create)
+container.bind(Token.DOMAIN_EVENT_NOTIFIER).toDynamicValue(DomainEventNotifierInversify.create)
 container.bind(Token.LOGGER).toDynamicValue(LoggerPino.create)
 container.bind(Token.JWT_SIGNER).toConstantValue(new JwtSignerHono())
 

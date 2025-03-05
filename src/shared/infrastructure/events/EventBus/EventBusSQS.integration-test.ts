@@ -1,11 +1,17 @@
+import { Container } from 'inversify'
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import { juniorXpId } from '../../../../../test/mother/TalkMother/JuniorXp.ts'
 import { testSQSOptions } from '../../../../../test/setups/testSQSOptions.ts'
 import { waitFor } from '../../../../../test/utils/waitFor.ts'
-import { TalkProposed } from '../../../../talks/domain/events/TalkProposed.ts'
-import type { DomainEvent } from '../../../domain/events/DomainEvent.js'
+import {
+  TalkProposed,
+  type TalkProposedPrimitives,
+} from '../../../../talks/domain/events/TalkProposed.ts'
+import { DomainEventCode } from '../../../domain/events/DomainEventCode.js'
 import type { DomainEventSubscriber } from '../../../domain/events/DomainEventSubscriber.ts'
-import { DomainEventMapperFake } from '../DomainEventMapper/DomainEventMapperFake.ts'
+import type { Primitives } from '../../../domain/models/hex/Primitives.js'
+import { Token } from '../../../domain/services/Token.js'
+import { DomainEventNotifierInversify } from '../DomainEventMapper/DomainEventNotifierInversify.js'
 import { EventBusSQS } from './EventBusSQS.ts'
 
 describe('EventBusSQS', () => {
@@ -13,10 +19,16 @@ describe('EventBusSQS', () => {
   let domainEventSubscriber: DomainEventSubscriberFake
 
   beforeAll(async () => {
+    const container = new Container()
+    container.bind(Token.DOMAIN_EVENT_NOTIFIER).toDynamicValue(DomainEventNotifierInversify.create)
     domainEventSubscriber = new DomainEventSubscriberFake()
-    const domainEventMapper = new DomainEventMapperFake(domainEventSubscriber)
-    eventBus = new EventBusSQS(testSQSOptions, domainEventMapper)
-    await eventBus.initialize()
+    container.bind(Token.SUBSCRIBER).toConstantValue(domainEventSubscriber)
+    container
+      .bind<EventBusSQS>(Token.EVENT_BUS)
+      .toDynamicValue(EventBusSQS.create)
+      .onActivation(EventBusSQS.onActivation)
+    container.bind(Token.SQS_CONFIG).toConstantValue(testSQSOptions)
+    eventBus = await container.getAsync<EventBusSQS>(Token.EVENT_BUS)
   })
 
   beforeEach(() => {
@@ -41,8 +53,17 @@ describe('EventBusSQS', () => {
 class DomainEventSubscriberFake implements DomainEventSubscriber<TalkProposed> {
   private eventReceived?: TalkProposed
 
-  canHandle(domainEvent: DomainEvent): boolean {
-    return domainEvent instanceof TalkProposed
+  canHandle(primitives: unknown): primitives is TalkProposedPrimitives {
+    return Boolean(
+      typeof primitives === 'object' &&
+        primitives &&
+        'code' in primitives &&
+        primitives.code === DomainEventCode.TALK_PROPOSED,
+    )
+  }
+
+  cast(primitives: Primitives<TalkProposed>): TalkProposed {
+    return TalkProposed.fromPrimitives(primitives)
   }
 
   async on(domainEvent: TalkProposed): Promise<void> {

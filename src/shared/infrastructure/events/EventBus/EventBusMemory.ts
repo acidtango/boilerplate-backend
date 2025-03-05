@@ -1,44 +1,29 @@
 import type { interfaces } from 'inversify'
-import type { DomainEvent, DomainEventPrimitives } from '../../../domain/events/DomainEvent.ts'
+import type { DomainEvent } from '../../../domain/events/DomainEvent.ts'
 import type { EventBus } from '../../../domain/models/hex/EventBus.ts'
 import { Token } from '../../../domain/services/Token.ts'
 import type { Closable } from '../../repositories/Closable.js'
 import type { Reseteable } from '../../repositories/Reseteable.js'
 import { sleep } from '../../utils/sleep.ts'
-import type { DomainEventMapper } from '../DomainEventMapper/DomainEventMapper.ts'
+import type { DomainEventNotifier } from '../DomainEventMapper/DomainEventNotifier.js'
 
 export class EventBusMemory implements EventBus, Closable, Reseteable {
   public static async create({ container }: interfaces.Context) {
-    return new EventBusMemory(await container.getAsync(Token.DOMAIN_EVENT_MAPPER))
+    return new EventBusMemory(await container.getAsync(Token.DOMAIN_EVENT_NOTIFIER))
   }
 
-  private readonly domainEventMapper: DomainEventMapper
+  private readonly notifier: DomainEventNotifier
 
   private promises: Array<Promise<unknown>> = []
 
-  constructor(domainEventMapper: DomainEventMapper) {
-    this.domainEventMapper = domainEventMapper
+  constructor(notifier: DomainEventNotifier) {
+    this.notifier = notifier
   }
 
   async publish(domainEvents: DomainEvent[]): Promise<void> {
     for (const domainEvent of domainEvents) {
-      const promise = sleep(0).then(() => this.handle(domainEvent.toPrimitives()))
+      const promise = sleep(0).then(() => this.notifier.handle(domainEvent.toPrimitives()))
       this.promises.push(promise)
-    }
-  }
-
-  async handle(event: DomainEventPrimitives) {
-    const subscribersAndEvent = this.domainEventMapper.getSubscribersAndEvent(event.code)
-
-    if (!subscribersAndEvent) {
-      return
-    }
-
-    const { subscribers, eventClass } = subscribersAndEvent
-
-    for await (const subscriber of subscribers) {
-      const domainEvent = eventClass.fromPrimitives(event)
-      await subscriber.on(domainEvent)
     }
   }
 

@@ -8,19 +8,11 @@ import {
 import type { interfaces } from 'inversify'
 import { Consumer } from 'sqs-consumer'
 import type { DomainEvent } from '../../../domain/events/DomainEvent.ts'
-import type { DomainEventCode } from '../../../domain/events/DomainEventCode.ts'
 import type { EventBus } from '../../../domain/models/hex/EventBus.ts'
 import { Token } from '../../../domain/services/Token.ts'
 import type { Closable } from '../../repositories/Closable.ts'
 import type { Reseteable } from '../../repositories/Reseteable.js'
-import type { DomainEventMapper } from '../DomainEventMapper/DomainEventMapper.ts'
-
-type MessageContent = {
-  code: DomainEventCode
-  eventId: string
-  occurredAt: string
-  talkId: string
-}
+import type { DomainEventNotifier } from '../DomainEventMapper/DomainEventNotifier.js'
 
 export type SQSConfig = {
   credentials: {
@@ -37,7 +29,7 @@ export type SQSConfig = {
 export class EventBusSQS implements EventBus, Closable, Reseteable {
   private queueUrl: string
 
-  private readonly domainEventMapper: DomainEventMapper
+  private readonly notifier: DomainEventNotifier
 
   private readonly client: SQSClient
 
@@ -46,11 +38,16 @@ export class EventBusSQS implements EventBus, Closable, Reseteable {
   public static async create({ container }: interfaces.Context) {
     return new EventBusSQS(
       container.get<SQSConfig>(Token.SQS_CONFIG),
-      await container.getAsync<DomainEventMapper>(Token.DOMAIN_EVENT_MAPPER),
+      await container.getAsync<DomainEventNotifier>(Token.DOMAIN_EVENT_NOTIFIER),
     )
   }
 
-  constructor(config: SQSConfig, domainEventMapper: DomainEventMapper) {
+  public static async onActivation(_: interfaces.Context, eventBus: EventBusSQS) {
+    await eventBus.initialize()
+    return eventBus
+  }
+
+  constructor(config: SQSConfig, notifier: DomainEventNotifier) {
     this.client = new SQSClient({
       credentials: {
         accessKeyId: config.credentials.accessKeyId,
@@ -60,7 +57,7 @@ export class EventBusSQS implements EventBus, Closable, Reseteable {
       endpoint: config.endpoint,
     })
     this.queueUrl = config.sqs.url
-    this.domainEventMapper = domainEventMapper
+    this.notifier = notifier
   }
 
   async close(): Promise<void> {
@@ -77,7 +74,7 @@ export class EventBusSQS implements EventBus, Closable, Reseteable {
       alwaysAcknowledge: true,
       handleMessage: async ({ Body }) => {
         if (!Body) return
-        await this.onMessage(JSON.parse(Body))
+        await this.notifier.handle(JSON.parse(Body))
       },
       waitTimeSeconds: 0,
     })
@@ -116,23 +113,6 @@ export class EventBusSQS implements EventBus, Closable, Reseteable {
         },
       })
       await this.client.send(command)
-    }
-  }
-
-  private async onMessage(message: MessageContent) {
-    if (!message) return
-
-    const subscribersAndEvent = this.domainEventMapper.getSubscribersAndEvent(message.code)
-
-    if (!subscribersAndEvent) {
-      return
-    }
-
-    const { subscribers, eventClass } = subscribersAndEvent
-
-    for await (const subscriber of subscribers) {
-      const domainEvent = eventClass.fromPrimitives(message)
-      await subscriber.on(domainEvent)
     }
   }
 
