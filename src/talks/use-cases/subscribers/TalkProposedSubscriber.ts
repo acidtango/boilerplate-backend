@@ -1,7 +1,7 @@
 import type { interfaces } from 'inversify'
 import { DomainEventCode } from '../../../shared/domain/events/DomainEventCode.ts'
 import { DomainEventSubscriber } from '../../../shared/domain/events/DomainEventSubscriber.ts'
-import type { Primitives } from '../../../shared/domain/models/hex/Primitives.js'
+import type { Primitives } from '../../../shared/domain/models/hex/Primitives.ts'
 import {
   type EmailSender,
   ThanksForTheProposal,

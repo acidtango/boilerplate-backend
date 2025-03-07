@@ -7,11 +7,11 @@ import {
   TalkProposed,
   type TalkProposedPrimitives,
 } from '../../../../talks/domain/events/TalkProposed.ts'
-import { DomainEventCode } from '../../../domain/events/DomainEventCode.js'
+import { DomainEventCode } from '../../../domain/events/DomainEventCode.ts'
 import type { DomainEventSubscriber } from '../../../domain/events/DomainEventSubscriber.ts'
-import type { Primitives } from '../../../domain/models/hex/Primitives.js'
-import { Token } from '../../../domain/services/Token.js'
-import { DomainEventNotifierInversify } from '../DomainEventMapper/DomainEventNotifierInversify.js'
+import type { Primitives } from '../../../domain/models/hex/Primitives.ts'
+import { Token } from '../../../domain/services/Token.ts'
+import { DomainEventNotifierInversify } from '../DomainEventMapper/DomainEventNotifierInversify.ts'
 import { EventBusSQS } from './EventBusSQS.ts'
 
 describe('EventBusSQS', () => {

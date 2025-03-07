@@ -1,4 +1,4 @@
-import type { Primitives } from '../models/hex/Primitives.js'
+import type { Primitives } from '../models/hex/Primitives.ts'
 import type { DomainEvent } from './DomainEvent.ts'
 
 export abstract class DomainEventSubscriber<T extends DomainEvent> {

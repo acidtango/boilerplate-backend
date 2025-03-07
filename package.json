@@ -23,11 +23,11 @@
     "@aws-sdk/client-sqs": "^3.758.0",
     "@hono/node-server": "^1.12.0",
     "@hono/swagger-ui": "^0.4.0",
-    "hono": "^4.7.2",
+    "hono": "^4.7.4",
     "hono-openapi": "^0.3.1",
     "inversify": "^6.0.2",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.13.1",
+    "mongodb": "^6.14.2",
     "pino": "^9.6.0",
     "sqs-consumer": "^11.6.0",
     "zod": "^3.24.2",
@@ -36,9 +36,9 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^22.13.5",
+    "@types/node": "^22.13.9",
     "pino-pretty": "^13.0.0",
-    "typescript": "^5.7.3",
-    "vitest": "^3.0.7"
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
   }
 }

@@ -1,5 +1,5 @@
 import { createMiddleware } from 'hono/factory'
-import type { Logger } from '../../../domain/services/Logger.js'
+import type { Logger } from '../../../domain/services/Logger.ts'
 
 export function loggerMiddleware(logger: Logger) {
   return createMiddleware(async (c, next) => {

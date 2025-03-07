@@ -1,8 +1,8 @@
 import type { interfaces } from 'inversify'
 import type { DomainEvent } from '../../../domain/events/DomainEvent.ts'
 import type { DomainEventSubscriber } from '../../../domain/events/DomainEventSubscriber.ts'
-import { Token } from '../../../domain/services/Token.js'
-import type { DomainEventNotifier } from './DomainEventNotifier.js'
+import { Token } from '../../../domain/services/Token.ts'
+import type { DomainEventNotifier } from './DomainEventNotifier.ts'
 
 export class DomainEventNotifierInversify implements DomainEventNotifier {
   private readonly subscribers: DomainEventSubscriber<DomainEvent>[]

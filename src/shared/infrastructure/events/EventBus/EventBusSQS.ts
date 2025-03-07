@@ -11,8 +11,8 @@ import type { DomainEvent } from '../../../domain/events/DomainEvent.ts'
 import type { EventBus } from '../../../domain/models/hex/EventBus.ts'
 import { Token } from '../../../domain/services/Token.ts'
 import type { Closable } from '../../repositories/Closable.ts'
-import type { Reseteable } from '../../repositories/Reseteable.js'
-import type { DomainEventNotifier } from '../DomainEventMapper/DomainEventNotifier.js'
+import type { Reseteable } from '../../repositories/Reseteable.ts'
+import type { DomainEventNotifier } from '../DomainEventMapper/DomainEventNotifier.ts'
 
 export type SQSConfig = {
   credentials: {
