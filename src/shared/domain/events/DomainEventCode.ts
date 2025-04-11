@@ -3,6 +3,7 @@ export const DomainEventCode = {
   SPEAKER_REGISTERED: 'SPEAKER_REGISTERED',
   SPEAKER_PROFILE_UPDATED: 'SPEAKER_PROFILE_UPDATED',
   TALK_PROPOSED: 'TALK_PROPOSED',
+  SOMETHING_HAPPENED: 'SOMETHING_HAPPENED',
 }
 
 export type DomainEventCode = (typeof DomainEventCode)[keyof typeof DomainEventCode]
