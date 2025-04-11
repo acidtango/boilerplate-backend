@@ -7,6 +7,7 @@ export const LoginSpeakerRequestDTO = z
     password: z.string().openapi({ example: CONCHA_ASENSIO.password }),
   })
   .openapi({
-    ref: 'LoginSpeakerRequestDTO',
-    description: 'TODO',
+    ref: 'LoginSpeakerRequest',
+    description:
+      'Contains the login credentials of a speaker. This data is used to authenticate and issue an access token.',
   })

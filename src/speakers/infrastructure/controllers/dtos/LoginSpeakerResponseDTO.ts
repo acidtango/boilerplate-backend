@@ -7,8 +7,9 @@ export const LoginSpeakerResponseDTO = z
     accessToken: z.string().openapi({ example: CONCHA_ASENSIO.jwt }),
   })
   .openapi({
-    ref: 'LoginSpeakerResponseDTO',
-    description: 'TODO',
+    ref: 'LoginSpeakerResponse',
+    description:
+      'Response returned upon successful authentication of a speaker. It contains the JWT access token required for authorized requests.',
   })
 
 export type LoginSpeakerResponseDTO = zod.infer<typeof LoginSpeakerResponseDTO>

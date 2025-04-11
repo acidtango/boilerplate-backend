@@ -10,8 +10,9 @@ export const SpeakerProfileDTO = z
     language: z.nativeEnum(Language).openapi({ example: CONCHA_ASENSIO.language }),
   })
   .openapi({
-    ref: 'SpeakerProfileDTO',
-    description: 'TODO',
+    ref: 'SpeakerProfile',
+    description:
+      'Profile details of a speaker, including their name, age, and preferred language for presenting talks.',
   })
 
 export type SpeakerProfileDTO = zod.infer<typeof SpeakerProfileDTO>

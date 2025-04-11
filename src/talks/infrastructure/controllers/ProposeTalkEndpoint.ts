@@ -4,6 +4,7 @@ import { EventId } from '../../../shared/domain/models/ids/EventId.ts'
 import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
 import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
+import { ApiTag } from '../../../shared/infrastructure/controllers/schemas/ApiTag.ts'
 import { TalkDescription } from '../../domain/models/TalkDescription.ts'
 import { TalkTitle } from '../../domain/models/TalkTitle.ts'
 import { ProposeTalk } from '../../use-cases/ProposeTalk.ts'
@@ -14,8 +15,10 @@ export const ProposeTalkEndpoint = {
   path: '/api/v1/talks',
   handlers: factory.createHandlers(
     describeRoute({
-      description: 'Proposes a talk',
-      tags: ['Talks'], // TODO: use enum
+      summary: 'Propose a new talk',
+      description:
+        'Allows a registered speaker to propose a talk for a specific event. The talk must include a title, description, language, and optionally, co-speakers. The talk is initially submitted as a proposal and awaits review.',
+      tags: [ApiTag.TALKS],
       security: [{ bearerAuth: [] }],
       responses: {
         201: {

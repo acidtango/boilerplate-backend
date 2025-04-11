@@ -2,15 +2,16 @@ import { describeRoute } from 'hono-openapi'
 import { validator } from 'hono-openapi/zod'
 import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
-import { SpeakerIdInPath } from '../../../shared/infrastructure/controllers/schemas/SpeakerId.ts'
+import { ApiTag } from '../../../shared/infrastructure/controllers/schemas/ApiTag.ts'
 import { z } from '../../../shared/infrastructure/controllers/zod.ts'
 import { SpeakerAge } from '../../domain/models/SpeakerAge.ts'
 import { SpeakerName } from '../../domain/models/SpeakerName.ts'
 import { UpdateSpeakerProfile } from '../../use-cases/UpdateSpeakerProfile.ts'
+import { SpeakerIdDTO } from './dtos/SpeakerIdDTO.ts'
 import { SpeakerProfileDTO } from './dtos/SpeakerProfileDTO.ts'
 
 const ParamsSchema = z.object({
-  id: SpeakerIdInPath,
+  id: SpeakerIdDTO,
 })
 
 export const UpdateSpeakerProfileEndpoint = {
@@ -18,8 +19,10 @@ export const UpdateSpeakerProfileEndpoint = {
   path: '/api/v1/speakers/:id/profile',
   handlers: factory.createHandlers(
     describeRoute({
-      description: 'Updates an speaker profile',
-      tags: ['Speakers'],
+      summary: 'Update speaker profile',
+      description:
+        'Updates the profile of a speaker, including their name, age, and language preferences.',
+      tags: [ApiTag.SPEAKERS],
       security: [{ bearerAuth: [] }],
       responses: {
         200: {

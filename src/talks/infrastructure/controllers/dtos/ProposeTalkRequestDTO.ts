@@ -15,6 +15,7 @@ export const ProposeTalkRequestDTO = z
     eventId: z.string().uuid().openapi({ example: JSDAY_CANARIAS.id }),
   })
   .openapi({
-    ref: 'ProposeTalkRequestDTO',
-    description: 'TODO',
+    ref: 'ProposeTalkRequest',
+    description:
+      'Payload used by a speaker to propose a new talk for a specific event. Includes information about the talk, the speaker, and optionally co-speakers.',
   })

@@ -20,6 +20,7 @@ export const TalkResponseDTO = z
     eventId: z.string().uuid().openapi({ example: JSDAY_CANARIAS.id }),
   })
   .openapi({
-    ref: 'TalkResponseDTO',
-    description: 'TODO',
+    ref: 'TalkResponse',
+    description:
+      'Detailed response for a proposed talk, including all metadata, speaker and reviewer IDs, current status, and approval state.',
   })

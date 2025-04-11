@@ -2,15 +2,16 @@ import { describeRoute } from 'hono-openapi'
 import { resolver, validator } from 'hono-openapi/zod'
 import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
-import { SpeakerIdInPath } from '../../../shared/infrastructure/controllers/schemas/SpeakerId.ts'
+import { ApiTag } from '../../../shared/infrastructure/controllers/schemas/ApiTag.ts'
 import { z } from '../../../shared/infrastructure/controllers/zod.ts'
 import type { SpeakerProfilePrimitives } from '../../domain/models/SpeakerProfile.ts'
 import { GetSpeaker } from '../../use-cases/GetSpeaker.ts'
+import { SpeakerIdDTO } from './dtos/SpeakerIdDTO.ts'
 import type { SpeakerProfileDTO } from './dtos/SpeakerProfileDTO.ts'
 import { SpeakerResponseDTO } from './dtos/SpeakerResponseDTO.ts'
 
 const ParamsSchema = z.object({
-  id: SpeakerIdInPath,
+  id: SpeakerIdDTO,
 })
 
 export const GetSpeakerEndpoint = {
@@ -18,8 +19,9 @@ export const GetSpeakerEndpoint = {
   path: '/api/v1/speakers/:id',
   handlers: factory.createHandlers(
     describeRoute({
-      description: 'Gets a speaker profile',
-      tags: ['Speakers'],
+      summary: 'Retrieve speaker profile',
+      description: 'Fetches the profile details of a specific speaker by their ID.',
+      tags: [ApiTag.SPEAKERS],
       security: [{ bearerAuth: [] }],
       responses: {
         200: {

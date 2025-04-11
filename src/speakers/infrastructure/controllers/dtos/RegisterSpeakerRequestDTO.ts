@@ -8,6 +8,7 @@ export const RegisterSpeakerRequestDTO = z
     password: z.string().openapi({ example: CONCHA_ASENSIO.password }),
   })
   .openapi({
-    ref: 'RegisterSpeakerRequestDTO',
-    description: 'TODO',
+    ref: 'RegisterSpeakerRequest',
+    description:
+      'Represents the information required to register a new speaker. Includes a unique identifier, an email address, and a password for authentication.',
   })

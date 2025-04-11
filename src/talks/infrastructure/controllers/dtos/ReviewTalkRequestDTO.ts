@@ -6,6 +6,7 @@ export const ReviewTalkRequestDTO = z
     reviewerId: z.string().uuid().openapi({ example: DAILOS.id }),
   })
   .openapi({
-    ref: 'ReviewTalkRequestDTO',
-    description: 'TODO',
+    ref: 'ReviewTalkRequest',
+    description:
+      'Request to assign a reviewer to a proposed talk. Used to begin the evaluation process.',
   })

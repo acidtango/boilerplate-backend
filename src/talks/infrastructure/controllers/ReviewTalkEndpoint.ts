@@ -3,13 +3,14 @@ import { validator } from 'hono-openapi/zod'
 import { OrganizerId } from '../../../shared/domain/models/ids/OrganizerId.ts'
 import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
-import { TalkIdInPath } from '../../../shared/infrastructure/controllers/schemas/TalkId.ts'
+import { ApiTag } from '../../../shared/infrastructure/controllers/schemas/ApiTag.ts'
 import { z } from '../../../shared/infrastructure/controllers/zod.ts'
 import { ReviewTalk } from '../../use-cases/ReviewTalk.ts'
 import { ReviewTalkRequestDTO } from './dtos/ReviewTalkRequestDTO.ts'
+import { TalkIdDTO } from './dtos/TalkIdDTO.ts'
 
 const ParamsSchema = z.object({
-  id: TalkIdInPath,
+  id: TalkIdDTO,
 })
 
 export const ReviewTalkEndpoint = {
@@ -17,8 +18,10 @@ export const ReviewTalkEndpoint = {
   path: '/api/v1/talks/:id/assignation',
   handlers: factory.createHandlers(
     describeRoute({
-      description: 'Assigns a talk for review',
-      tags: ['Talks'],
+      summary: 'Assign a reviewer to a talk',
+      description:
+        "Assigns a reviewer to evaluate a proposed talk. This changes the status of the talk to 'REVIEWING' and links the talk to the specified reviewer ID.",
+      tags: [ApiTag.TALKS],
       security: [{ bearerAuth: [] }],
       responses: {
         200: {
