@@ -60,3 +60,4 @@ sed -i '' '14i\
 import { factory } from "./shared/infrastructure/controllers/factory.ts";
 ' src/container.ts
 
+node --run check:fix
