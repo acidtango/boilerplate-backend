@@ -55,7 +55,7 @@ export class TestClient {
   }
 
   async loginSpeaker() {
-    return this.ky.post('api/v1/speakers/login', {
+    return this.ky.post<{accessToken: string}>('api/v1/speakers/login', {
       json: {
         email: CONCHA_ASENSIO.email,
         password: CONCHA_ASENSIO.password,
