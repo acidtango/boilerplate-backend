@@ -8,7 +8,6 @@ import { JSDAY_CANARIAS } from '../../src/shared/infrastructure/fixtures/events.
 import { DAILOS } from '../../src/shared/infrastructure/fixtures/organizers.ts'
 import { CONCHA_ASENSIO } from '../../src/shared/infrastructure/fixtures/speakers.ts'
 import { JUNIOR_XP } from '../../src/shared/infrastructure/fixtures/talks.ts'
-import type { LoginSpeakerResponseDTO } from '../../src/speakers/infrastructure/controllers/dtos/LoginSpeakerResponseDTO.js'
 import type { EmailSenderFake } from '../fakes/EmailSenderFake.ts'
 import { container } from '../setups/container.ts'
 
@@ -56,7 +55,7 @@ export class TestClient {
   }
 
   async loginSpeaker() {
-    return this.ky.post<LoginSpeakerResponseDTO>('api/v1/speakers/login', {
+    return this.ky.post('api/v1/speakers/login', {
       json: {
         email: CONCHA_ASENSIO.email,
         password: CONCHA_ASENSIO.password,
