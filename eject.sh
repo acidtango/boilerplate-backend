@@ -39,3 +39,10 @@ sed -i '' '18,29d' src/container.ts
 sed -i '' '20,29d' src/container.ts
 sed -i '' '22,22d' src/container.ts
 sed -i '' '24,26d' src/container.ts
+
+sed -i '' '47,161d' test/utils/TestClient.ts
+sed -i '' '20,27d' test/utils/TestClientUtils.ts
+
+sed -i '' '3,15d' src/shared/domain/errors/DomainErrorCode.ts
+
+sed -i '' '2,5d' src/shared/domain/events/DomainEventCode.ts
