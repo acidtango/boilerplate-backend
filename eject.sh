@@ -46,3 +46,17 @@ sed -i '' '20,27d' test/utils/TestClientUtils.ts
 sed -i '' '3,15d' src/shared/domain/errors/DomainErrorCode.ts
 
 sed -i '' '2,5d' src/shared/domain/events/DomainEventCode.ts
+sed -i '' '14,26d' src/shared/infrastructure/errors/domainErrorToHttpStatusCode.ts
+
+sed -i '' '20i\
+container.bind(Token.ENDPOINT).toConstantValue({
+    method: "get" as const,
+    path: "/hello-world",
+    handlers: factory.createHandlers((c) => c.json(null, 200)),
+})
+' src/container.ts
+
+sed -i '' '14i\
+import { factory } from "./shared/infrastructure/controllers/factory.ts";
+' src/container.ts
+
