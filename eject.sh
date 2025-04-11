@@ -26,6 +26,9 @@ sed -i '' '4,4d' test/fakes/EmailSenderFake.ts
 sed -i '' '8,16d' test/fakes/EmailSenderFake.ts
 sed -i '' '10,10d' test/fakes/EmailSenderFake.ts
 
+sed -i '' '1s/^\(.\{25\}\).\{22\}/\1/' src/shared/infrastructure/email/EmailSenderNoop.ts
+sed -i '' '4,4d' src/shared/infrastructure/email/EmailSenderNoop.ts
+
 sed -i '' '2,2d' test/setups/container.ts
 sed -i '' '6,7d' test/setups/container.ts
 sed -i '' '16,18d' test/setups/container.ts
