@@ -6,15 +6,21 @@ describe('create event', () => {
   it('can be created', async () => {
     const client = await createClient()
 
-    const { status } = await client.createEvent()
+    await client.createEvent()
 
-    expect(status).toEqual(201)
-    const { body: events } = await client.getEvents()
-    expect(events).toHaveLength(1)
-    const firstEvent = events[0]
-    expect(firstEvent.id).toEqual(JSDAY_CANARIAS.id)
-    expect(firstEvent.name).toEqual(JSDAY_CANARIAS.name)
-    expect(firstEvent.dateRange.startDate).toEqual(JSDAY_CANARIAS.startDate.toISOString())
-    expect(firstEvent.dateRange.endDate).toEqual(JSDAY_CANARIAS.endDate.toISOString())
+    await expect(client.getEvents()).resolves.hasBody([
+      {
+        id: JSDAY_CANARIAS.id,
+        name: JSDAY_CANARIAS.name,
+        dateRange: {
+          startDate: JSDAY_CANARIAS.startDate.toISOString(),
+          endDate: JSDAY_CANARIAS.endDate.toISOString(),
+        },
+        proposalsDateRange: {
+          startDate: JSDAY_CANARIAS.proposalsStartDate.toISOString(),
+          deadline: JSDAY_CANARIAS.proposalsDeadlineDate.toISOString(),
+        },
+      },
+    ])
   })
 })

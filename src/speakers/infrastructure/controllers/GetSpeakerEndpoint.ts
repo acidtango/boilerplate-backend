@@ -45,7 +45,7 @@ export const GetSpeakerEndpoint = {
         {
           id: speakerPrimitives.id,
           email: speakerPrimitives.email,
-          isEmailValidated: 3,
+          isEmailValidated: speakerPrimitives.isEmailValidated,
           profile: mapProfileToDTO(speakerPrimitives.profile),
         },
         200,

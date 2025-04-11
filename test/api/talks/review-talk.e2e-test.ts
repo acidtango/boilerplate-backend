@@ -10,14 +10,18 @@ describe('talk can be reviewed', () => {
     await client.createJsDayCanarias()
     await client.proposeTalk({ id: JUNIOR_XP.id })
 
-    const { status } = await client.assignReviewer({
-      id: JUNIOR_XP.id,
-      reviewerId: DAILOS.id,
-    })
+    await client.assignReviewer({ id: JUNIOR_XP.id, reviewerId: DAILOS.id })
 
-    expect(status).toEqual(200)
-    const { body: talk } = await client.getTalk(JUNIOR_XP.id)
-    expect(talk.status).toEqual('REVIEWING')
-    expect(talk.reviewerId).toEqual(DAILOS.id)
+    await expect(client.getTalk(JUNIOR_XP.id)).hasBody({
+      cospeakers: [],
+      description: expect.any(String),
+      eventId: expect.any(String),
+      id: expect.any(String),
+      language: expect.any(String),
+      reviewerId: DAILOS.id,
+      speakerId: expect.any(String),
+      status: 'REVIEWING',
+      title: expect.any(String),
+    })
   })
 })

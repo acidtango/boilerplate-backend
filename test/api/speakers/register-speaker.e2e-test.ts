@@ -10,17 +10,17 @@ describe('register speaker', () => {
 
     await client.registerSpeaker()
 
-    const { status } = await client.loginSpeaker()
-    expect(status).toBe(200)
+    await expect(client.loginSpeaker()).resolves.hasStatus(200)
   })
 
   it('fails when already registered', async () => {
     const client = await createClient()
 
     await client.registerSpeaker()
-    const { body } = await client.registerSpeaker({ expectedStatus: 409 })
+    const error = client.registerSpeaker()
 
-    expect(body).toEqual({
+    await expect(error).rejects.hasStatus(409)
+    await expect(error).rejects.hasBody({
       code: 'SPEAKER_EMAIL_ALREADY_USED',
       message: `Speaker with email ${CONCHA_ASENSIO.email} already exists`,
       type: 'SpeakerEmailAlreadyUsedError',
@@ -35,8 +35,9 @@ describe('register speaker', () => {
     const expectedExp = now.addDays(1).toSeconds()
     await client.registerSpeaker()
 
-    const { body } = await client.loginSpeaker()
+    const res = await client.loginSpeaker()
 
+    const body = await res.json()
     const content = jwt.decode(body.accessToken) as JwtPayload
     expect(content.sub).toEqual(CONCHA_ASENSIO.id)
     expect(content.iat).toEqual(expectedIat)
@@ -45,11 +46,9 @@ describe('register speaker', () => {
 
   it('returns an error with invalid jwt in authenticated endpoint', async () => {
     const client = await createClient()
-    const { status } = await client.getEvents({
-      expectedStatus: 401,
-      jwt: 'invalid-jwt',
-    })
 
-    expect(status).toEqual(401)
+    const prom = client.getEvents({ jwt: 'invalid-jwt' })
+
+    await expect(prom).rejects.hasStatus(401)
   })
 })

@@ -1,3 +1,4 @@
+import type zod from 'zod'
 import { z } from '../../../../shared/infrastructure/controllers/zod.ts'
 import { CONCHA_ASENSIO } from '../../../../shared/infrastructure/fixtures/speakers.ts'
 
@@ -9,3 +10,5 @@ export const LoginSpeakerResponseDTO = z
     ref: 'LoginSpeakerResponseDTO',
     description: 'TODO',
   })
+
+export type LoginSpeakerResponseDTO = zod.infer<typeof LoginSpeakerResponseDTO>

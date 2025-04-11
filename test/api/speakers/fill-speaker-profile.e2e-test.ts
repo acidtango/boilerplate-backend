@@ -9,9 +9,17 @@ describe('fill speaker profile', () => {
 
     await client.updateProfile()
 
-    const { body: speaker } = await client.getSpeaker()
-    expect(speaker.profile.name).toEqual(CONCHA_ASENSIO.name)
-    expect(speaker.profile.age).toEqual(CONCHA_ASENSIO.age)
-    expect(speaker.profile.language).toEqual(CONCHA_ASENSIO.language)
+    const res = await client.getSpeaker()
+
+    expect(res).hasBody({
+      id: CONCHA_ASENSIO.id,
+      email: CONCHA_ASENSIO.email,
+      isEmailValidated: false,
+      profile: {
+        age: CONCHA_ASENSIO.age,
+        language: CONCHA_ASENSIO.language,
+        name: CONCHA_ASENSIO.name,
+      },
+    })
   })
 })

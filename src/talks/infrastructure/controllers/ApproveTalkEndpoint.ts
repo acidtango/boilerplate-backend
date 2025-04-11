@@ -19,7 +19,7 @@ export const ApproveTalkEndpoint = {
       tags: ['Talks'],
       security: [{ bearerAuth: [] }],
       responses: {
-        200: {
+        204: {
           description: 'Talk approved',
         },
       },
@@ -31,7 +31,7 @@ export const ApproveTalkEndpoint = {
 
       await approveTalk.execute(TalkId.fromPrimitives(param.id))
 
-      return c.body(null, 200)
+      return c.body(null, 204)
     },
   ),
 } satisfies Endpoint
