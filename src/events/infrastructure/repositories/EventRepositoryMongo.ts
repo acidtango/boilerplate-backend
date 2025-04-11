@@ -30,7 +30,7 @@ export class EventRepositoryMongo implements EventRepository, Reseteable, Closab
   }
 
   async exists(id: EventId): Promise<boolean> {
-    return Boolean(await this.talkEvents.findOne({ id: id.toPrimitives() }))
+    return (await this.talkEvents.countDocuments({ id: id.toPrimitives() })) > 0
   }
 
   async reset() {

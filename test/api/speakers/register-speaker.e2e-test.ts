@@ -1,5 +1,4 @@
-import type { JwtPayload } from 'jsonwebtoken'
-import * as jwt from 'jsonwebtoken'
+import { decode } from 'hono/jwt'
 import { describe, expect, it } from 'vitest'
 import { CONCHA_ASENSIO } from '../../../src/shared/infrastructure/fixtures/speakers.ts'
 import { createClient } from '../../utils/TestClient.ts'
@@ -38,10 +37,10 @@ describe('register speaker', () => {
     const res = await client.loginSpeaker()
 
     const body = await res.json()
-    const content = jwt.decode(body.accessToken) as JwtPayload
-    expect(content.sub).toEqual(CONCHA_ASENSIO.id)
-    expect(content.iat).toEqual(expectedIat)
-    expect(content.exp).toEqual(expectedExp)
+    const content = decode(body.accessToken)
+    expect(content.payload.sub).toEqual(CONCHA_ASENSIO.id)
+    expect(content.payload.iat).toEqual(expectedIat)
+    expect(content.payload.exp).toEqual(expectedExp)
   })
 
   it('returns an error with invalid jwt in authenticated endpoint', async () => {

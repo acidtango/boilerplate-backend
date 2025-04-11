@@ -14,7 +14,6 @@ import { container } from '../setups/container.ts'
 
 export class TestClient {
   public readonly container: Container
-  private app: Hono
   private ky: KyInstance
 
   public static async create(container: Container) {
@@ -22,7 +21,6 @@ export class TestClient {
   }
 
   constructor(app: Hono, container: Container) {
-    this.app = app
     this.container = container
 
     this.ky = ky.extend({
