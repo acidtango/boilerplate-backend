@@ -1,10 +1,9 @@
-import * as jwt from 'jsonwebtoken'
+import { decode } from 'hono/jwt'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { SpeakerRepositoryFake } from '../../../test/fakes/SpeakerRepositoryFake.ts'
 import { conchaEmail, conchaPassword } from '../../../test/mother/SpeakerMother/Concha.ts'
 import { jorgeEmail } from '../../../test/mother/SpeakerMother/Jorge.ts'
 import { notImportantPassword } from '../../../test/mother/SpeakerMother/NotImportant.ts'
-import type { JwtPayload } from '../../auth/domain/JwtPayload.ts'
 import { PlainPassword } from '../../shared/domain/models/PlainPassword.ts'
 import { Role } from '../../shared/domain/models/Role.ts'
 import { CONCHA_ASENSIO } from '../../shared/infrastructure/fixtures/speakers.ts'
@@ -34,11 +33,11 @@ describe('LoginSpeaker', () => {
       password: conchaPassword(),
     })
 
-    const content = jwt.decode(accessToken) as JwtPayload
-    expect(content.sub).toEqual(CONCHA_ASENSIO.id)
-    expect(content.iat).toEqual(expectedIat)
-    expect(content.exp).toEqual(expectedExp)
-    expect(content.role).toEqual(Role.SPEAKER)
+    const content = decode(accessToken)
+    expect(content.payload.sub).toEqual(CONCHA_ASENSIO.id)
+    expect(content.payload.iat).toEqual(expectedIat)
+    expect(content.payload.exp).toEqual(expectedExp)
+    expect(content.payload.role).toEqual(Role.SPEAKER)
   })
 
   it('fails if password is incorrect', async () => {
