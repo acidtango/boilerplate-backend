@@ -19,7 +19,7 @@ export const LoginSpeakerEndpoint = {
         'Allows a speaker to log in by providing their email and password. Returns an access token upon successful authentication.',
       tags: [ApiTag.SPEAKERS],
       responses: {
-        201: {
+        200: {
           description: 'Speaker logged in',
           content: {
             'application/json': {
@@ -38,7 +38,7 @@ export const LoginSpeakerEndpoint = {
 
       const accessToken = await loginSpeaker.execute({ email, password })
 
-      return c.json({ accessToken }, 201)
+      return c.json({ accessToken }, 200)
     },
   ),
 } satisfies Endpoint
