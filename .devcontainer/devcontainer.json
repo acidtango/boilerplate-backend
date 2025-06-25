@@ -1,9 +1,9 @@
 {
-  "dockerComposeFile": "../docker-compose.yml",
+  "dockerComposeFile": ["docker-compose.yml"],
   "service": "devcontainer",
   "workspaceFolder": "/workspace",
   "forwardPorts": [8080],
-  "postCreateCommand": "npm install",
+  "postStartCommand": "./.devcontainer/postStartCommand.sh",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -12,7 +12,10 @@
         "eamodio.gitlens",
         "vitest.explorer",
         "mongodb.mongodb-vscode"
-      ]
+      ],
+      "settings": {
+        "git.autofetch": true
+      }
     }
   }
 }
