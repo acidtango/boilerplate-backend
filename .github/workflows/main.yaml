@@ -45,7 +45,7 @@ jobs:
     timeout-minutes: 10
     services:
       database:
-        image: mongo:6.0.15-jammy
+        image: mongo:7.0.21-jammy
         env:
           MONGO_INITDB_ROOT_USERNAME: acid
           MONGO_INITDB_ROOT_PASSWORD: password
