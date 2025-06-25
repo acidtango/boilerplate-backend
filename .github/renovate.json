@@ -1,6 +1,6 @@
 {
-  "extends": ["config:base"],
-  "schedule": ["after 9pm and before 5am"],
+  "extends": ["config:recommended"],
+  "schedule": ["after 9pm", "before 5am"],
   "prConcurrentLimit": 2,
   "dependencyDashboard": true,
   "packageRules": [
@@ -41,15 +41,15 @@
       "automerge": false
     },
     {
-      "matchPackagePatterns": [
-        "^typeorm",
-        "^@mikro-orm",
-        "^mongo",
-        "^postgres"
-      ],
       "groupName": "orm",
       "prPriority": 1,
-      "automerge": false
+      "automerge": false,
+      "matchPackageNames": [
+        "/^typeorm/",
+        "/^@mikro-orm/",
+        "/^mongo/",
+        "/^postgres/"
+      ]
     }
   ]
 }
