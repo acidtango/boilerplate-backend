@@ -49,7 +49,7 @@ jobs:
     container: node:lts
     timeout-minutes: 10
     services:
-      db:
+      database:
         image: mongo:6.0.15-jammy
         env:
           MONGO_INITDB_ROOT_USERNAME: acid
@@ -87,13 +87,13 @@ jobs:
       - name: Integration Tests
         run: node --run test:integration -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
         env:
-          DB_HOST: db
+          DB_HOST: database
           AWS_ENDPOINT: http://aws:4566
           AWS_SQS_URL: http://sqs.eu-west-1.aws:4566/000000000000/localstack-queue
       - name: Tests
         run: node --run test:e2e:db -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
         env:
-          DB_HOST: db
+          DB_HOST: database
           AWS_ENDPOINT: http://aws:4566
           AWS_SQS_URL: http://sqs.eu-west-1.aws:4566/000000000000/localstack-queue
 

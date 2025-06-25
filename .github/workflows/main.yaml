@@ -17,9 +17,9 @@ jobs:
       - name: success
         run: echo "is not a draft PR"
 
-  lint:
+  check:
     needs: skip-draft
-    name: Lint
+    name: Check
     runs-on: ubuntu-latest
     container: node:lts
     timeout-minutes: 10
@@ -29,15 +29,13 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm ci
       - name: Typecheck
-        run: yarn typecheck
-      - name: Eslint
-        run: yarn lint:ci
-      - name: Prettier
-        run: yarn format:ci
+        run: node --run typecheck
+      - name: Run static analysis
+        run: node --run check:ci
 
   tests:
     needs: skip-draft
@@ -51,7 +49,6 @@ jobs:
         env:
           MONGO_INITDB_ROOT_USERNAME: acid
           MONGO_INITDB_ROOT_PASSWORD: password
-          MONGO_INITDB_DATABASE: develop
         options: >-
           --health-cmd "echo 'dgit stb.runCommand("ping").ok' | mongosh --quiet"
           --health-interval 10s
@@ -59,6 +56,8 @@ jobs:
           --health-retries 5
         ports:
           - 27017:27017
+        volumes:
+          - ${{ github.workspace }}/init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh
       aws:
         image: localstack/localstack
         env:
@@ -75,19 +74,23 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      - name: Tests
-        run: |
-          yarn test:ci --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+        run: npm ci
+      - name: Unitary Tests
+        run: node --run test:unitary -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+      - name: Integration Tests
+        run: node --run test:integration -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
         env:
           DB_HOST: database
-          DB_USERNAME: acid
-          DB_PASSWORD: password
-          DB_DATABASE: develop
           AWS_ENDPOINT: http://aws:4566
-          AWS_SQS_URL: http://sqs.eu-west-1.aws.localstack.cloud:4566/000000000000/localstack-queue
+          AWS_SQS_URL: http://sqs.eu-west-1.aws:4566/000000000000/localstack-queue
+      - name: Tests
+        run: node --run test:e2e:db -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+        env:
+          DB_HOST: database
+          AWS_ENDPOINT: http://aws:4566
+          AWS_SQS_URL: http://sqs.eu-west-1.aws:4566/000000000000/localstack-queue
 
   docker-build:
     needs: skip-draft
