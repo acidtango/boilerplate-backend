@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   db:
-    image: mongo:6.0.15-jammy
+    image: mongo:6.0.24-jammy
     environment:
       MONGO_INITDB_ROOT_USERNAME: acid
       MONGO_INITDB_ROOT_PASSWORD: password
