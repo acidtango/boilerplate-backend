@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "src/main.ts",
   "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "scripts": {
     "start": "node src/main.ts",
     "start:dev": "node --watch src/main.ts",
@@ -16,9 +19,10 @@
     "test:e2e:db": "vitest --config ./test/config/vitest.e2e-db.ts",
     "test:memory": "vitest --config ./test/config/vitest.memory.ts"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "engines": {
+    "node": "^22||^24",
+    "npm": "~10.9"
+  },
   "dependencies": {
     "@aws-sdk/client-sqs": "^3.758.0",
     "@hono/node-server": "^1.12.0",
