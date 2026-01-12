@@ -72,7 +72,7 @@ jobs:
           - '4566:4566'
     strategy:
       matrix:
-        shard: [1]
+        shard: [1,2]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
