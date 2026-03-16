@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  devcontainer:
+    container_name: boilerplate-backend-devcontainer
+    build:
+      context: ..
+      dockerfile: ./.devcontainer/Dockerfile
+    environment:
+      EXAMPLE: ${EXAMPLE}
+
+    volumes:
+      - ..:/workspace:cached
