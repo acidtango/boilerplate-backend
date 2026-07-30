@@ -33,9 +33,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Typecheck
-        run: node --run typecheck
+        run: pnpm run typecheck
       - name: Run static analysis
-        run: node --run check:ci
+        run: pnpm run check:ci
 
   tests:
     needs: skip-draft
