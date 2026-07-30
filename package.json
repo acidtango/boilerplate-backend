@@ -1,5 +1,4 @@
 {
-  "packageManager": "pnpm@11.18.0",
   "name": "codetalk-pure",
   "version": "1.0.0",
   "main": "src/main.ts",
