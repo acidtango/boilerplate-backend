@@ -26,16 +26,20 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
       - uses: actions/cache@v4
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
       - name: Typecheck
-        run: node --run typecheck
+        run: pnpm run typecheck
       - name: Run static analysis
-        run: node --run check:ci
+        run: pnpm run check:ci
 
   tests:
     needs: skip-draft
@@ -71,22 +75,26 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
       - uses: actions/cache@v4
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
       - name: Unitary Tests
-        run: node --run test:unitary -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+        run: pnpm run test:unitary -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
       - name: Integration Tests
-        run: node --run test:integration -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+        run: pnpm run test:integration -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
         env:
           DB_HOST: database
           AWS_ENDPOINT: http://aws:4566
           AWS_SQS_URL: http://sqs.eu-west-1.aws:4566/000000000000/localstack-queue
       - name: Tests
-        run: node --run test:e2e:db -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
+        run: pnpm run test:e2e:db -- --shard=${{ matrix.shard }}/${{ strategy.job-total }}
         env:
           DB_HOST: database
           AWS_ENDPOINT: http://aws:4566
