@@ -1,0 +1,18 @@
+.devcontainer/devcontainer.json
+  h_b6495fbde60501 6
+README.md
+  h_b6495fbde60501 8
+pnpm-workspace.yaml
+  h_b6495fbde60501 4-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "19f8e2420a34a35ff5c884ea4a4427ebbf18b4e5",
+  "prompts": {},
+  "humans": {
+    "h_b6495fbde60501": {
+      "author": "Daute Rodríguez <daute@acidtango.com>"
+    }
+  }
+}
