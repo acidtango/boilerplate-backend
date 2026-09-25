@@ -1,0 +1,7 @@
+allowBuilds:
+  '@biomejs/biome': true
+  esbuild: true
+minimumReleaseAgeExclude:
+  - '@aws-sdk/client-sqs@3.1130.0'
+overrides:
+  hono: 4.13.7

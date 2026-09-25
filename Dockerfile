@@ -1,13 +1,16 @@
 FROM node:24-alpine
 
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
 WORKDIR /app
 
 ENV NODE_ENV production
 
 ADD ./package.json ./package.json
-ADD ./package-lock.json ./package-lock.json
+ADD ./pnpm-lock.yaml ./pnpm-lock.yaml
+ADD ./pnpm-workspace.yaml ./pnpm-workspace.yaml
 
-RUN npm ci --only=production
+RUN pnpm install --frozen-lockfile --production
 
 COPY . .
 
