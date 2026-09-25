@@ -3,7 +3,7 @@
   "service": "devcontainer",
   "workspaceFolder": "/workspace",
   "forwardPorts": [8080],
-  "postCreateCommand": "npm install",
+  "postCreateCommand": "corepack enable && corepack prepare pnpm@latest --activate && pnpm install",
   "customizations": {
     "vscode": {
       "extensions": [

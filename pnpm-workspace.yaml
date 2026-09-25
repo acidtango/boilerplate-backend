@@ -1,6 +1,15 @@
 allowBuilds:
   '@biomejs/biome': true
   esbuild: true
+supportedArchitectures:
+  os:
+    - darwin
+    - linux
+  cpu:
+    - arm64
+    - x64
+  libc:
+    - glibc
 minimumReleaseAgeExclude:
   - '@aws-sdk/client-sqs@3.1130.0'
 overrides:
