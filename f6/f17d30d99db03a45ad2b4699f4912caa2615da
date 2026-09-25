@@ -1,0 +1,14 @@
+.devcontainer/devcontainer.json
+  h_b6495fbde60501 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f6f17d30d99db03a45ad2b4699f4912caa2615da",
+  "prompts": {},
+  "humans": {
+    "h_b6495fbde60501": {
+      "author": "Daute Rodríguez <daute@acidtango.com>"
+    }
+  }
+}
