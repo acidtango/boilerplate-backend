@@ -1,0 +1,16 @@
+package.json
+  h_b6495fbde60501 29
+pnpm-lock.yaml
+  h_b6495fbde60501 33-34,899-900,1859
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "de2fc610fa619221807a6f3b0d7282cc8bf4bff1",
+  "prompts": {},
+  "humans": {
+    "h_b6495fbde60501": {
+      "author": "Daute Rodríguez <daute@acidtango.com>"
+    }
+  }
+}
