@@ -1,5 +1,4 @@
-import { describeRoute } from 'hono-openapi'
-import { resolver } from 'hono-openapi/zod'
+import { describeRoute, resolver } from 'hono-openapi'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
 import { ApiTag } from '../../../shared/infrastructure/controllers/schemas/ApiTag.ts'
 import { z } from '../../../shared/infrastructure/controllers/zod.ts'

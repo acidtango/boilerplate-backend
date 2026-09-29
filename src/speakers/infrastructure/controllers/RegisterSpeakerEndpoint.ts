@@ -1,5 +1,4 @@
-import { describeRoute } from 'hono-openapi'
-import { validator } from 'hono-openapi/zod'
+import { describeRoute, validator } from 'hono-openapi'
 import { EmailAddress } from '../../../shared/domain/models/EmailAddress.ts'
 import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
 import { PlainPassword } from '../../../shared/domain/models/PlainPassword.ts'
