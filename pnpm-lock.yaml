@@ -18,14 +18,14 @@ importers:
         specifier: 1.19.17
         version: 1.19.17(hono@4.13.7)
       '@hono/swagger-ui':
-        specifier: 0.4.1
-        version: 0.4.1(hono@4.13.7)
+        specifier: 0.6.1
+        version: 0.6.1(hono@4.13.7)
       hono:
         specifier: 4.13.7
         version: 4.13.7
       hono-openapi:
-        specifier: 0.3.1
-        version: 0.3.1(typescript@7.0.2)
+        specifier: 0.4.8
+        version: 0.4.8(@hono/arktype-validator@2.0.1(arktype@2.0.0-rc.25)(hono@4.13.7))(@hono/effect-validator@1.2.0(effect@3.22.0)(hono@4.13.7))(@hono/typebox-validator@0.2.6(@sinclair/typebox@0.34.52)(hono@4.13.7))(@hono/valibot-validator@0.5.3(hono@4.13.7)(valibot@1.4.2(typescript@7.0.2)))(@hono/zod-validator@0.4.3(hono@4.13.7)(zod@3.25.76))(@sinclair/typebox@0.34.52)(@valibot/to-json-schema@1.7.1(valibot@1.4.2(typescript@7.0.2)))(arktype@2.0.0-rc.25)(effect@3.22.0)(hono@4.13.7)(openapi-types@12.1.3)(valibot@1.4.2(typescript@7.0.2))(zod-openapi@4.2.4(zod@3.25.76))(zod@3.25.76)
       inversify:
         specifier: 6.2.2
         version: 6.2.2(reflect-metadata@0.2.2)
@@ -375,8 +375,8 @@ packages:
     peerDependencies:
       hono: 4.13.7
 
-  '@hono/swagger-ui@0.4.1':
-    resolution: {integrity: sha512-kPaJatHffeYQ3yVkHo878hCqwfapqx54FczJVJ+eRWt8J4biyVVMIdCAJb6MyA8bcnHUoTmUpPc7OJAV1VTg2g==}
+  '@hono/swagger-ui@0.6.1':
+    resolution: {integrity: sha512-sJTvldu1GPeEPfyeLG7gRj+W4vEuD+JDi+JjJ3TJs/DvMUtBLs0KJO5yokGegWWdy5qrbdnQGekbhgNRmPmYKQ==}
     peerDependencies:
       hono: 4.13.7
 
@@ -851,8 +851,50 @@ packages:
   help-me@5.0.0:
     resolution: {integrity: sha512-7xgomUX6ADmcYzFik0HzAxh/73YlKR9bmFzf51CZwR+b6YtzU2m0u49hQCqV6SvlqIqsaxovfwdvbnsw3b/zpg==}
 
-  hono-openapi@0.3.1:
-    resolution: {integrity: sha512-8j02qmkE3BJkr+s/tqiauiHy+/OMmM/bvf33G9CZpBRdyM95aVL3fgRj4tNsRdkL+e/rM5+EClozD3jxnwr4eA==}
+  hono-openapi@0.4.8:
+    resolution: {integrity: sha512-LYr5xdtD49M7hEAduV1PftOMzuT8ZNvkyWfh1DThkLsIr4RkvDb12UxgIiFbwrJB6FLtFXLoOZL9x4IeDk2+VA==}
+    peerDependencies:
+      '@hono/arktype-validator': ^2.0.0
+      '@hono/effect-validator': ^1.2.0
+      '@hono/typebox-validator': ^0.2.0 || ^0.3.0
+      '@hono/valibot-validator': ^0.5.1
+      '@hono/zod-validator': ^0.4.1
+      '@sinclair/typebox': ^0.34.9
+      '@valibot/to-json-schema': ^1.0.0-beta.3
+      arktype: ^2.0.0
+      effect: ^3.11.3
+      hono: 4.13.7
+      openapi-types: ^12.1.3
+      valibot: ^1.0.0-beta.9
+      zod: ^3.23.8
+      zod-openapi: ^4.0.0
+    peerDependenciesMeta:
+      '@hono/arktype-validator':
+        optional: true
+      '@hono/effect-validator':
+        optional: true
+      '@hono/typebox-validator':
+        optional: true
+      '@hono/valibot-validator':
+        optional: true
+      '@hono/zod-validator':
+        optional: true
+      '@sinclair/typebox':
+        optional: true
+      '@valibot/to-json-schema':
+        optional: true
+      arktype:
+        optional: true
+      effect:
+        optional: true
+      hono:
+        optional: true
+      valibot:
+        optional: true
+      zod:
+        optional: true
+      zod-openapi:
+        optional: true
 
   hono@4.13.7:
     resolution: {integrity: sha512-c8/gF9ac8Y78/agExVocyLevgR+JlpNB444Py0FSX8pJoPdYUfUzRcXtYEYGwt6l19qIlVZPN5Mfsw9jFShmQQ==}
@@ -1478,7 +1520,7 @@ snapshots:
     dependencies:
       hono: 4.13.7
 
-  '@hono/swagger-ui@0.4.1(hono@4.13.7)':
+  '@hono/swagger-ui@0.6.1(hono@4.13.7)':
     dependencies:
       hono: 4.13.7
 
@@ -1836,9 +1878,10 @@ snapshots:
 
   help-me@5.0.0: {}
 
-  hono-openapi@0.3.1(typescript@7.0.2):
+  hono-openapi@0.4.8(@hono/arktype-validator@2.0.1(arktype@2.0.0-rc.25)(hono@4.13.7))(@hono/effect-validator@1.2.0(effect@3.22.0)(hono@4.13.7))(@hono/typebox-validator@0.2.6(@sinclair/typebox@0.34.52)(hono@4.13.7))(@hono/valibot-validator@0.5.3(hono@4.13.7)(valibot@1.4.2(typescript@7.0.2)))(@hono/zod-validator@0.4.3(hono@4.13.7)(zod@3.25.76))(@sinclair/typebox@0.34.52)(@valibot/to-json-schema@1.7.1(valibot@1.4.2(typescript@7.0.2)))(arktype@2.0.0-rc.25)(effect@3.22.0)(hono@4.13.7)(openapi-types@12.1.3)(valibot@1.4.2(typescript@7.0.2))(zod-openapi@4.2.4(zod@3.25.76))(zod@3.25.76):
     dependencies:
       json-schema-walker: 2.0.0
+      openapi-types: 12.1.3
     optionalDependencies:
       '@hono/arktype-validator': 2.0.1(arktype@2.0.0-rc.25)(hono@4.13.7)
       '@hono/effect-validator': 1.2.0(effect@3.22.0)(hono@4.13.7)
@@ -1850,12 +1893,9 @@ snapshots:
       arktype: 2.0.0-rc.25
       effect: 3.22.0
       hono: 4.13.7
-      openapi-types: 12.1.3
       valibot: 1.4.2(typescript@7.0.2)
       zod: 3.25.76
       zod-openapi: 4.2.4(zod@3.25.76)
-    transitivePeerDependencies:
-      - typescript
 
   hono@4.13.7: {}
 
@@ -1909,8 +1949,7 @@ snapshots:
     dependencies:
       wrappy: 1.0.2
 
-  openapi-types@12.1.3:
-    optional: true
+  openapi-types@12.1.3: {}
 
   picocolors@1.1.1: {}
 
