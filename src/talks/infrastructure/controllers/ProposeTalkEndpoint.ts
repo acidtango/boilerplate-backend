@@ -1,5 +1,4 @@
-import { describeRoute } from 'hono-openapi'
-import { validator } from 'hono-openapi/zod'
+import { describeRoute, validator } from 'hono-openapi'
 import { EventId } from '../../../shared/domain/models/ids/EventId.ts'
 import { SpeakerId } from '../../../shared/domain/models/ids/SpeakerId.ts'
 import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'

@@ -1,5 +1,4 @@
-import { describeRoute } from 'hono-openapi'
-import { validator } from 'hono-openapi/zod'
+import { describeRoute, validator } from 'hono-openapi'
 import { TalkId } from '../../../shared/domain/models/ids/TalkId.ts'
 import { type Endpoint, factory } from '../../../shared/infrastructure/controllers/factory.ts'
 import { ApiTag } from '../../../shared/infrastructure/controllers/schemas/ApiTag.ts'
