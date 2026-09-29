@@ -1,0 +1,21 @@
+package.json
+  s_b44f8dae43b538::t_5d9f124f5ffc34 30
+pnpm-lock.yaml
+  s_b44f8dae43b538::t_f6fb3e7cc4a74e 36-37,965-966,996-998,1047-1049,1906,1911,1918,1944-1945,2010,2012
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b4ade1f5d0da037135343557060ad89c06f772cd",
+  "prompts": {},
+  "sessions": {
+    "s_b44f8dae43b538": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f13683d4dffe36XPTccZ61iOw9",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Daute Rodríguez <daute@acidtango.com>"
+    }
+  }
+}
