@@ -1,0 +1,36 @@
+.gitignore
+  h_b6495fbde60501 5
+src/events/infrastructure/controllers/CreateEventEndpoint.ts
+  h_b6495fbde60501 1
+src/events/infrastructure/controllers/ListEventsEndpoint.ts
+  h_b6495fbde60501 1
+src/main.ts
+  h_b6495fbde60501 3,10
+src/speakers/infrastructure/controllers/GetSpeakerEndpoint.ts
+  h_b6495fbde60501 1
+src/speakers/infrastructure/controllers/LoginSpeakerEndpoint.ts
+  h_b6495fbde60501 1
+src/speakers/infrastructure/controllers/RegisterSpeakerEndpoint.ts
+  h_b6495fbde60501 1
+src/speakers/infrastructure/controllers/UpdateSpeakerProfileEndpoint.ts
+  h_b6495fbde60501 1
+src/talks/infrastructure/controllers/ApproveTalkEndpoint.ts
+  h_b6495fbde60501 1
+src/talks/infrastructure/controllers/GetTalkEndpoint.ts
+  h_b6495fbde60501 1
+src/talks/infrastructure/controllers/ProposeTalkEndpoint.ts
+  h_b6495fbde60501 1
+src/talks/infrastructure/controllers/ReviewTalkEndpoint.ts
+  h_b6495fbde60501 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d714cebe527eeffb2a18dd8c8620d701e909b23f",
+  "prompts": {},
+  "humans": {
+    "h_b6495fbde60501": {
+      "author": "Daute Rodríguez <daute@acidtango.com>"
+    }
+  }
+}
