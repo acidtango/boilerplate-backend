@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  hono: 4.13.7
+  hono: 4.13.12
 
 importers:
 
@@ -16,16 +16,16 @@ importers:
         version: 3.1130.0
       '@hono/node-server':
         specifier: 1.19.17
-        version: 1.19.17(hono@4.13.7)
+        version: 1.19.17(hono@4.13.12)
       '@hono/swagger-ui':
         specifier: 0.6.1
-        version: 0.6.1(hono@4.13.7)
+        version: 0.6.1(hono@4.13.12)
       hono:
-        specifier: 4.13.7
-        version: 4.13.7
+        specifier: 4.13.12
+        version: 4.13.12
       hono-openapi:
         specifier: 1.3.3
-        version: 1.3.3(@valibot/to-json-schema@1.7.1(valibot@1.4.2(typescript@7.0.2)))(effect@3.22.0)(hono@4.13.7)(valibot@1.4.2(typescript@7.0.2))(zod-openapi@4.2.4(zod@3.25.76))(zod@3.25.76)
+        version: 1.3.3(@valibot/to-json-schema@1.7.1(valibot@1.4.2(typescript@7.0.2)))(effect@3.22.0)(hono@4.13.12)(valibot@1.4.2(typescript@7.0.2))(zod-openapi@4.2.4(zod@3.25.76))(zod@3.25.76)
       inversify:
         specifier: 6.2.2
         version: 6.2.2(reflect-metadata@0.2.2)
@@ -351,18 +351,18 @@ packages:
     resolution: {integrity: sha512-dSneS5qhiauZWGDCeK4o695Xd9nUNjviSZCMQrj10eetr8Uln1ucn6bbphOM6UynAMMtNIzZNSpL9vnASJwrPQ==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
-      hono: 4.13.7
+      hono: 4.13.12
 
   '@hono/standard-validator@0.4.0':
     resolution: {integrity: sha512-MxOm1asDh9j7c1D0KiWwppSbFgAQxTRO4YEhjMrJn3lF1BIcXenPdgjSGKDRfQmZdaTaMA8slQLETgVOKyJxFw==}
     peerDependencies:
       '@standard-schema/spec': ^1.0.0
-      hono: 4.13.7
+      hono: 4.13.12
 
   '@hono/swagger-ui@0.6.1':
     resolution: {integrity: sha512-sJTvldu1GPeEPfyeLG7gRj+W4vEuD+JDi+JjJ3TJs/DvMUtBLs0KJO5yokGegWWdy5qrbdnQGekbhgNRmPmYKQ==}
     peerDependencies:
-      hono: 4.13.7
+      hono: 4.13.12
 
   '@inversifyjs/common@1.4.0':
     resolution: {integrity: sha512-qfRJ/3iOlCL/VfJq8+4o5X4oA14cZSBbpAmHsYj8EsIit1xDndoOl0xKOyglKtQD4u4gdNVxMHx4RWARk/I4QA==}
@@ -864,10 +864,10 @@ packages:
   hono-openapi@1.3.3:
     resolution: {integrity: sha512-+LVFPQEc4eDrXr/Rd0QQkRh/DbEZRXnm1RZU4bVaoqmWiWgspT4nNHIQMgi44X+D9/8k1eGzHvR0KLNPJ/0xaQ==}
     peerDependencies:
-      hono: 4.13.7
+      hono: 4.13.12
 
-  hono@4.13.7:
-    resolution: {integrity: sha512-c8/gF9ac8Y78/agExVocyLevgR+JlpNB444Py0FSX8pJoPdYUfUzRcXtYEYGwt6l19qIlVZPN5Mfsw9jFShmQQ==}
+  hono@4.13.12:
+    resolution: {integrity: sha512-6E2QDAc9Ick9Sq77ZrGS/dk2WUYni91aufTw6LJKpV7w8kW5/GxVUc650FOADOmlwg3K+f7Pun6XlV+pYmW6gw==}
     engines: {node: '>=16.9.0'}
 
   inversify@6.2.2:
@@ -1456,18 +1456,18 @@ snapshots:
   '@esbuild/win32-x64@0.28.1':
     optional: true
 
-  '@hono/node-server@1.19.17(hono@4.13.7)':
+  '@hono/node-server@1.19.17(hono@4.13.12)':
     dependencies:
-      hono: 4.13.7
+      hono: 4.13.12
 
-  '@hono/standard-validator@0.4.0(@standard-schema/spec@1.1.0)(hono@4.13.7)':
+  '@hono/standard-validator@0.4.0(@standard-schema/spec@1.1.0)(hono@4.13.12)':
     dependencies:
       '@standard-schema/spec': 1.1.0
-      hono: 4.13.7
+      hono: 4.13.12
 
-  '@hono/swagger-ui@0.6.1(hono@4.13.7)':
+  '@hono/swagger-ui@0.6.1(hono@4.13.12)':
     dependencies:
-      hono: 4.13.7
+      hono: 4.13.12
 
   '@inversifyjs/common@1.4.0': {}
 
@@ -1811,14 +1811,14 @@ snapshots:
 
   help-me@5.0.0: {}
 
-  hono-openapi@1.3.3(@valibot/to-json-schema@1.7.1(valibot@1.4.2(typescript@7.0.2)))(effect@3.22.0)(hono@4.13.7)(valibot@1.4.2(typescript@7.0.2))(zod-openapi@4.2.4(zod@3.25.76))(zod@3.25.76):
+  hono-openapi@1.3.3(@valibot/to-json-schema@1.7.1(valibot@1.4.2(typescript@7.0.2)))(effect@3.22.0)(hono@4.13.12)(valibot@1.4.2(typescript@7.0.2))(zod-openapi@4.2.4(zod@3.25.76))(zod@3.25.76):
     dependencies:
-      '@hono/standard-validator': 0.4.0(@standard-schema/spec@1.1.0)(hono@4.13.7)
+      '@hono/standard-validator': 0.4.0(@standard-schema/spec@1.1.0)(hono@4.13.12)
       '@standard-community/standard-json': 0.3.6(@standard-schema/spec@1.1.0)(@types/json-schema@7.0.15)(@valibot/to-json-schema@1.7.1(valibot@1.4.2(typescript@7.0.2)))(effect@3.22.0)(valibot@1.4.2(typescript@7.0.2))(zod@3.25.76)
       '@standard-community/standard-openapi': 0.2.10(@standard-community/standard-json@0.3.6(@standard-schema/spec@1.1.0)(@types/json-schema@7.0.15)(@valibot/to-json-schema@1.7.1(valibot@1.4.2(typescript@7.0.2)))(effect@3.22.0)(valibot@1.4.2(typescript@7.0.2))(zod@3.25.76))(@standard-schema/spec@1.1.0)(effect@3.22.0)(openapi-types@12.1.3)(valibot@1.4.2(typescript@7.0.2))(zod-openapi@4.2.4(zod@3.25.76))(zod@3.25.76)
       '@standard-schema/spec': 1.1.0
       '@types/json-schema': 7.0.15
-      hono: 4.13.7
+      hono: 4.13.12
       openapi-types: 12.1.3
     transitivePeerDependencies:
       - '@valibot/to-json-schema'
@@ -1831,7 +1831,7 @@ snapshots:
       - zod-openapi
       - zod-to-json-schema
 
-  hono@4.13.7: {}
+  hono@4.13.12: {}
 
   inversify@6.2.2(reflect-metadata@0.2.2):
     dependencies:
